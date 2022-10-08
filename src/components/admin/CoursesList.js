@@ -27,7 +27,8 @@ if(window.confirm(`Do you Want delete ${name}`)){
 
     setTimeout(() => {
         setTrans('-100px')
-        
+        setLoad(false)
+        window.location.reload()
 
 
 
