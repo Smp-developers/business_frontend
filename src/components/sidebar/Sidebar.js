@@ -74,7 +74,7 @@ const Sidebar = () => {
       <div className="navF">
         <div className="top">
 
-          <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme.png`} alt="" width={40} height={40} style={{ marginTop: "25px" }} /></Link>
+          <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} style={{ marginTop: "25px" }} /></Link>
         </div>
         <input
           type="checkbox"
