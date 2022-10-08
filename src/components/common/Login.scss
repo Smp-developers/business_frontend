@@ -1,0 +1,148 @@
+.loginContainer{
+   
+    .topBox,.belowBox{
+        width: 305px;
+        padding: 15px;
+        border:2px solid orange;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:50px;
+        .left{
+            .fa-key{
+                font-size: 35px !important;
+                color: orange !important;
+            }
+        }
+        .right{
+            span{
+                &:first-child{
+                    font-size: 20px;
+                    color: orange;
+                    font-weight: 600;
+                }
+                font-size: 16px;
+                color: orange;
+                
+            }
+
+
+        }
+    }
+
+    .belowBox{
+        margin-top: 10px;
+        width: 305px;
+        span{
+            font-size: 18px;
+                    color: orange;
+                    font-weight: 600; 
+        }
+    }
+    .bottomBox{
+        padding: 15px;
+        border:3px solid #d2e1fee9;
+        background-color: white;
+
+        margin-top: 10px;
+        width: 305px;
+        label{
+            display: block;
+            padding: 5px 0px;
+            
+            &::after{
+                content: '*';
+                color: red;
+            }
+            
+        }
+        input{
+            width: 95%;
+            padding: 6px;
+            border: none;
+            outline: 0;
+            border:1px solid #d2e1fe8d;
+            border-radius: 5px;
+            background-color: white !important;
+        }
+        button{
+            padding: 8px 8px;
+            margin-top: 10px;
+            background: orange;
+            border: none;
+            outline: 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition:all ease 0.5s;
+            color: white;
+            &:hover{
+                transform: scale(1.1);
+            }
+            i{
+                margin-right: 5px;
+            }
+        }
+    }
+}
+.otp{
+    position: relative;
+    .verify{
+        position: absolute;
+        font-size: 12px;
+        right:10px ;
+        top:35px;
+        color: blue;
+        cursor: pointer;
+        text-transform: capitalize;
+        border-bottom: 2px solid blue;
+        padding-bottom: 1px;
+    }
+    .danger{
+        position: absolute;
+        right:40px;
+       }
+   
+}
+.emailContainer{
+    position: relative;
+   .emailVerify{
+    position: absolute;
+        font-size: 12px;
+        right:10px ;
+        top:35px;
+        color: blue;
+        cursor: pointer;
+        text-transform: capitalize;
+        border-bottom: 2px solid blue;
+        padding-bottom: 1px;
+   }
+   .danger{
+    position: absolute;
+    right:40px;
+   }
+  
+}
+
+.success{
+    position: absolute;
+    font-size: 12px;
+    right:10px ;
+    top:33px;
+    padding: 4px 6px;
+    border-radius: 50%;
+    color: white;
+    background: green;
+    text-align: center;
+   }
+   .fail{
+    position: absolute;
+    font-size: 12px;
+    right:10px ;
+    top:33px;
+    padding: 4px 6px;
+    border-radius: 50%;
+    color: white;
+    background: red;
+    text-align: center;
+   }
+  

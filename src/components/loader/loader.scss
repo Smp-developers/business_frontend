@@ -1,0 +1,36 @@
+body{
+    position: relative;
+}
+.loaderContainer{
+    background-color: rgba(128, 128, 128, 0.47) !important;
+    position: absolute !important;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 997 !important;
+    .loader{
+        height: 100px;
+        width: 100px;
+        border-top:4px solid blue;
+        border-radius: 50%;
+        animation: spin 0.9s linear infinite;
+        @keyframes spin {
+            0%{
+                transform: rotate(0deg);
+                border-top: 4px solid green;
+            }
+            50%{
+                transform: rotate(180deg);
+                border-top: 4px solid yellow;
+            }
+            100%{
+                transform: rotate(360deg);
+                border-top: 4px solid pink;
+            }
+        }
+    }
+}

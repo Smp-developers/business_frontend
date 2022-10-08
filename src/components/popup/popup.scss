@@ -1,0 +1,116 @@
+.popUpContainer {
+    background-color: rgba(128, 128, 128, 0.995) !important;
+    position: absolute !important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 997 !important;
+   
+
+    .popup {
+        background: white;
+       
+        width: 340px !important;
+        padding: 20px;
+        .disable{
+            cursor: not-allowed;
+        }
+        .fa-xmark{
+            background: white;
+            padding: 15px;
+            text-align: center;
+            color: red;
+        }
+
+
+
+        .btn{
+            margin-right: 15px;
+            border: none;
+            background: blue;
+            cursor: pointer;
+            padding: 5px;
+            color: white;
+            float:right;
+            border-radius: 5px;
+        }
+        
+
+        label{
+            margin-left: 10px;
+            &::after{
+                content:"*";
+                color:red;
+            }
+        }
+
+        input {
+            width: 90%;
+            padding: 5px;
+            margin:10px;
+            &:focus{
+                
+                outline: 0;
+            }
+            &.successs{
+                border:2px solid green;
+            }
+            &.fails{
+                border:2px solid red; 
+            }
+        }
+        
+
+        i {
+            position: absolute;
+            right:25px;
+            top:16px;
+            cursor: pointer;
+        }
+    }
+
+}
+
+
+@media (max-width:600px) {
+
+    // .sidebar{
+    //     height: 150vh;
+    // }
+ 
+    .popUpContainer{
+        position: absolute !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 125vw !important;
+        
+        
+        height: 125vh !important;
+        display: flex !important;
+     justify-content: flex-start !important;
+     
+     align-items: flex-start !important;
+    
+        
+       .popup{
+        margin: 50px 20px;
+        width: 300px;
+        position: relative;
+        .fa-xmark{
+            background: none !important;
+            position: absolute;
+            padding: 15px;
+            text-align: center;
+            color: red;
+            top:-8px;
+            right: 2px;
+        }
+       }
+    }
+}

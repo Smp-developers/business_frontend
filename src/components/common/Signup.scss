@@ -1,0 +1,81 @@
+.disable{
+    background: rgba(255, 166, 0, 0.406) !important;
+    cursor:not-allowed !important;
+   
+    &:hover{
+        transform: none !important;
+    }
+}
+.cp{
+    position: absolute;
+    font-size: 12px;
+    right:40px ;
+    top:5px;
+    color: blue;
+    cursor: pointer;
+    text-transform: capitalize;
+    border-bottom: 2px solid blue;
+    padding-bottom: 1px;
+}
+
+.otp{
+    position: relative;
+    .verify{
+        position: absolute;
+        font-size: 12px;
+        right:10px ;
+        top:35px;
+        color: blue;
+        cursor: pointer;
+        text-transform: capitalize;
+        border-bottom: 2px solid blue;
+        padding-bottom: 1px;
+    }
+    .danger{
+        position: absolute;
+        right:40px;
+       }
+   
+}
+.emailContainer{
+    position: relative;
+   .emailVerify{
+    position: absolute;
+        font-size: 12px;
+        right:10px ;
+        top:35px;
+        color: blue;
+        cursor: pointer;
+        text-transform: capitalize;
+        border-bottom: 2px solid blue;
+        padding-bottom: 1px;
+   }
+   .danger{
+    position: absolute;
+    right:40px;
+   }
+  
+}
+.success{
+    position: absolute;
+    font-size: 12px;
+    right:10px ;
+    top:33px;
+    padding: 4px 6px;
+    border-radius: 50%;
+    color: white;
+    background: green;
+    text-align: center;
+   }
+   .fail{
+    position: absolute;
+    font-size: 12px;
+    right:10px ;
+    top:33px;
+    padding: 4px 6px;
+    border-radius: 50%;
+    color: white;
+    background: red;
+    text-align: center;
+   }
+  
