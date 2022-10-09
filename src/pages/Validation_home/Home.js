@@ -11,7 +11,8 @@ const Home = () => {
   const darkMode = theme.state.darkMode;
  
   return (
-    <div
+    <div className="home">
+    <div className="homeContainer">  <div
       style={{
         backgroundColor: darkMode ? "#222" : "white",
         color: darkMode && "white"
@@ -23,6 +24,7 @@ const Home = () => {
       <About />
       <ProductList />
       <Contact />
+    </div></div>
     </div>
   );
 };
