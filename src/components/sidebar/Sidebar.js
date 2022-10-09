@@ -3,7 +3,9 @@ import "./sidebar.scss";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Cloudinary_url } from "../../Config";
+import { Cloudinary_url,Backend_url } from "../../Config";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 
 
 const Sidebar = () => {
@@ -11,7 +13,12 @@ const Sidebar = () => {
   const [user, setUser] = useState([])
   useEffect(() => {
     if (localStorage.getItem('userDetails')) {
-      setUser(prev => [...prev, JSON.parse(localStorage.getItem('userDetails'))])
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      .then(res=>{
+      
+        setUser(prev=>[...prev,res.data])
+      })
+     
     }
 
   }, [localStorage.getItem('userDetails')])

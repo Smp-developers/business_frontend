@@ -4,6 +4,7 @@ import './popup.scss'
 
 import { Backend_url } from '../../Config'
 import {  useNavigate } from 'react-router'
+import jwtDecode from 'jwt-decode'
 
 const Popup = ({ setShowModal }) => {
     const [password, setPassword] = useState('')
@@ -13,7 +14,7 @@ const Popup = ({ setShowModal }) => {
 
     useEffect(() => {
         if (localStorage.getItem('userDetails')) {
-            setEncPassword(JSON.parse(localStorage.getItem('userDetails')).password)
+            setEncPassword(jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).password)
             
         }
     }, [])

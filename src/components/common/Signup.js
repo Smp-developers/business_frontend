@@ -50,14 +50,14 @@ const Signup = () => {
     ).then(res => {
       setColor("green")
       setTrans('0px')
-      setMsg('Register in successfully....')
+      setMsg('Register in successfully please login with the credentials....')
 
 
       setTimeout(() => {
         setTrans('-100px')
-        localStorage.setItem('userDetails', JSON.stringify(res.data))
-        window.location.reload()
-        navigate('/')
+       
+        
+        navigate('/login')
 
 
       }, 3000)

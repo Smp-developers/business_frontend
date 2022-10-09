@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import Alert from '../alert/Alert'
+import jwtDecode from 'jwt-decode'
 
 
 import { Backend_url } from '../../Config'
@@ -31,7 +32,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     setLoad(true)
-    await axios.post(`${Backend_url}/api/login/`, {
+    await axios.post(`${Backend_url}/api/token/`, {
       "email": email,
       "password": password,
 
@@ -40,12 +41,17 @@ const Login = () => {
       setColor("green")
       setTrans('0px')
       setMsg('Logged in successfully....')
-
+     
+      
+      
 
       setTimeout(() => {
         setTrans('-100px')
+        setLoad(false)
         localStorage.setItem('userDetails', JSON.stringify(res.data))
+       
         navigate('/')
+        window.location.reload()
 
 
       }, 3000)
@@ -151,7 +157,7 @@ SMP Developers
           <div className='emailContainer'>
             <label>Email</label>
             <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required autoComplete='off' />
-            {send === '' && email !== '' && <div className='emailVerify' onClick={e => { sendOtp(e) }}>
+            {/* {send === '' && email !== '' && <div className='emailVerify' onClick={e => { sendOtp(e) }}>
               send otp
             </div>}
             {send === 'success' &&
@@ -163,7 +169,7 @@ SMP Developers
                 send otp
               </div>
                 <i className="fa-solid fa-xmark"></i></>
-            </div>}
+            </div>} */}
           </div>
           <br />
           <label>Password</label>
@@ -196,7 +202,7 @@ SMP Developers
 
 
           <div className='otp'>
-            <label>OTP</label>
+            {/* <label>OTP</label>
             <input type="text" value={otp} onChange={e => setOTP(e.target.value)} autocomplete="off" placeholder="Enter otp to Login" required />
             {otpVerify === '' && otp !== '' &&
               <div className='verify' onClick={e => { verifyOtp(e) }}>
@@ -218,10 +224,10 @@ SMP Developers
                 <div className='fail' onClick={e => { verifyOtp(e) }}>
                   <i className="fa-solid fa-xmark"></i>
                 </div></>
-            }
+            } */}
             <Link to='/forgotpassword' style={{marginTop:"10px",marginLeft:"180px"}}>Forgot password</Link>
           </div>
-          {(email !== '' && password !== '' && otpVerify === 'success')
+          {(email !== '' && password !== '' )
             &&
             (<button onClick={
               handleSubmit
@@ -229,7 +235,7 @@ SMP Developers
 
           }
           {
-            (email === '' || password === '' || otpVerify === "fail" || otpVerify === "")
+            (email === '' || password === '' )
             &&
             <button className='disable' style={{ float: "right" }}><i className="fa-solid fa-right-to-bracket"></i><span>Login</span></button>
           }

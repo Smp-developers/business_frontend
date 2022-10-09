@@ -9,7 +9,7 @@ import Alert from '../alert/Alert'
 import { Backend_url } from '../../Config'
 import './Signup.scss'
 import Loader from '../loader/Loader'
-
+import jwtDecode from 'jwt-decode'
 const ChangePassword = () => {
   const [load, setLoad] = useState(false)
   const [msg, setMsg] = useState('')
@@ -25,6 +25,7 @@ const ChangePassword = () => {
 
   const [matches, setMatches] = useState(false)
 
+
   const navigate = useNavigate()
   const [visible, setVisible] = useState(false)
   const [newvisible, setNewVisible] = useState(false)
@@ -32,12 +33,15 @@ const ChangePassword = () => {
 
   const [user, setUser] = useState([])
   useEffect(() => {
-    if (!localStorage.getItem('userDetails')) {
-      navigate('/')
+    if (localStorage.getItem('userDetails')) {
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      .then(res=>{
+      
+        setUser(res.data)
+      })
+     
     }
-    else {
-      setUser(JSON.parse(localStorage.getItem('userDetails')))
-    }
+
   }, [])
 
 
@@ -66,7 +70,7 @@ const ChangePassword = () => {
       setTimeout(() => {
         setTrans('-100px')
         localStorage.removeItem('userDetails')
-
+        window.location.reload()
         navigate('/login')
 
 

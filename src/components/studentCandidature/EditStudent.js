@@ -9,7 +9,7 @@ import { Backend_url } from '../../Config'
 import './edit.scss'
 import Loader from '../loader/Loader'
 import Popup from '../popup/Popup'
-
+import jwtDecode from 'jwt-decode'
 const EditStudent = () => {
 
     const [showModal, setShowModal] = useState(true)
@@ -44,8 +44,16 @@ const EditStudent = () => {
 
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('userDetails')))
-        setEmail(JSON.parse(localStorage.getItem('userDetails')).email)
+        if (localStorage.getItem('userDetails')) {
+            axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+            .then(res=>{
+            
+              setUser(res.data)
+            })
+           
+          }
+      
+        setEmail(jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).email)
     }, [])
     useEffect(() => {
 
@@ -79,9 +87,10 @@ const EditStudent = () => {
 
             setTimeout(() => {
                 setTrans('-100px')
-                localStorage.setItem('userDetails', JSON.stringify(res.data))
+                localStorage.removeItem('userDetails')
 
-                navigate('/candidature')
+                navigate('/login')
+                window.location.reload()
                 setLoad(false)
 
             }, 3000)

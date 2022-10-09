@@ -14,14 +14,14 @@ import TrainersStudent from './TrainersStudent';
 import ProfileStudent from './ProfileStudent';
 import StudentSchedule from './StudentSchedule';
 import CoursesStudent from './CoursesStudent';
-
+import jwtDecode from 'jwt-decode';
 
 
 const StudentCandidature = () => {
   const navigate = useNavigate()
   const [navVal, setNavVal] = useState('schedules')
   const [user, setUser] = useState([])
- 
+
 
   const [batchTrainers, setBatchTrainers] = useState([])
 
@@ -46,36 +46,40 @@ const StudentCandidature = () => {
 
   useEffect(() => {
     if (localStorage.getItem('userDetails')) {
-      setUser(JSON.parse(localStorage.getItem('userDetails')))
-     
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+        .then(res => {
+
+          setUser(res.data)
+        })
+
     }
 
   }, [])
 
   useEffect(() => {
-    axios.get(`${Backend_url}/api/getting_single_students/${JSON.parse(localStorage.getItem('userDetails')).id}`).then(res => {
+    axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`).then(res => {
       setUserDetails(res.data)
     })
   }, [])
 
 
   useEffect(() => {
-   if(updatedUserDetails.batch !==undefined){
-    axios.post(`${Backend_url}/api/get_batch_trainer`, { "batch": updatedUserDetails.batch }).then(res => {
-      setBatchTrainers(res.data)
-    })
-    
-   }
+    if (updatedUserDetails.batch !== undefined) {
+      axios.post(`${Backend_url}/api/get_batch_trainer`, { "batch": updatedUserDetails.batch }).then(res => {
+        setBatchTrainers(res.data)
+      })
+
+    }
   }, [updatedUserDetails])
 
 
 
-  
 
 
- 
 
-  
+
+
+
 
   const [courses, setCourses] = useState([])
   useEffect(() => {
@@ -101,19 +105,19 @@ const StudentCandidature = () => {
           <div className="em">{user.email}</div>
         </div>
 
-        <div className="endside" >
+        <div className="endside visi" >
 
           <div className="dotsIcon">
 
             <div
               style={{
-               
+
                 marginRight: "20px",
                 color: "white",
                 cursor: "pointer"
-                
+
               }}
-              className="add visi"
+              className="add "
             >
               <i className="fa-solid fa-gear" name="add" onClick={e => navigate('/common/settings')}></i>
 
@@ -126,11 +130,11 @@ const StudentCandidature = () => {
         <div className="bottomNav" >
           <ul>
             <div>
-            <li onClick={e => {
-              setNavVal('schedules')
-            }} className={navVal === 'schedules' ? 'borderPresent' : ''}>Schedules</li>
+              <li onClick={e => {
+                setNavVal('schedules')
+              }} className={navVal === 'schedules' ? 'borderPresent' : ''}>Schedules</li>
             </div>
-           <div> <li
+            <div> <li
               onClick={e => {
                 setNavVal('profile')
               }} className={navVal === 'profile' ? 'borderPresent' : ''}>Profile</li></div>
@@ -138,12 +142,12 @@ const StudentCandidature = () => {
               onClick={e => {
                 setNavVal('courses')
               }} className={navVal === 'courses' ? 'borderPresent' : ''}>Courses</li></div>
-           <div> <li
+            <div> <li
               onClick={e => {
                 setNavVal('trainers')
               }} className={navVal === 'trainers' ? 'borderPresent' : ''}>Trainers</li></div>
 
-           
+
           </ul>
         </div>
         <div className="decider">

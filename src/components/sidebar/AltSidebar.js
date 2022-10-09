@@ -1,14 +1,24 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Cloudinary_url } from "../../Config";
+import { Backend_url } from '../../Config';
+import jwtDecode from 'jwt-decode';
+
 const AltSidebar = () => {
     const [user, setUser] = useState([])
-    useEffect(() => {
-        if (localStorage.getItem('userDetails')) {
-            setUser(prev => [...prev, JSON.parse(localStorage.getItem('userDetails'))])
-        }
+   
+  useEffect(() => {
+    if (localStorage.getItem('userDetails')) {
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+        .then(res => {
 
-    }, [localStorage.getItem('userDetails')])
+          setUser(prev=>[...prev,res.data])
+        })
+
+    }
+
+  }, [])
 
 
     const hiddenHandle = (e) => {
@@ -36,7 +46,7 @@ const AltSidebar = () => {
 
                 <div className='menu' onClick={hiddenHandle}> <i className="fa-solid fa-bars"></i></div>
 
-                <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme.png`} alt="" width={40} height={40} /></Link></div>
+                <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>
 
 
             </div>

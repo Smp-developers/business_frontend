@@ -17,22 +17,45 @@ import EditAdmin from './components/admin/EditAdmin'
 import ChangePassword from "./components/common/ChangePassword";
 import ForgotPassword from "./components/common/ForgotPassword";
 import AltSidebar from "./components/sidebar/AltSidebar";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
+import { Backend_url } from "./Config";
+
+
 const App = () => {
   const [valid, setValid] = useState(false)
  const [user,setUser] = useState(false)
   
 
-  useEffect(() => {
-   if(localStorage.getItem('userDetails')){
-    setUser(true)
-    if (JSON.parse(localStorage.getItem('userDetails')).is_superuser) {
-      setValid(true)
+  
+useEffect(() => {
+    if (localStorage.getItem('userDetails')) {
+      setUser(true)
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      .then(res=>{
+      
+       if(res.data.is_superuser){
+        setValid(true)
+       }
+      })
+     
     }
+
+  }, [])
+
+// useEffect(() => {
+//     if (localStorage.getItem('userDetails')) {
+//     const  interval =  setInterval(()=>{
+//           localStorage.removeItem('userDetails')
+//       },5000)
+//       return ()=>clearInterval(interval)
+//     }
    
-   }
-  },[])
 
+// }, [])
 
+  
+ 
   return (
     <div>
       <BrowserRouter>
@@ -51,7 +74,7 @@ const App = () => {
                 {user &&<Route path="candidature" element={<StudentCandidature />} />}
                 {user &&<Route path="common/settings" element={<StudentSettings />} />}
                 {user &&  <Route path="edit" element={<EditStudent />} />}
-                {valid &&<Route path="frontend/editAdmin" element={<EditAdmin />} />}
+                {/* {valid &&<Route path="frontend/editAdmin" element={<EditAdmin />} />} */}
                 {valid && <Route path="frontend/admin" element={<Admin />} />}
                 {valid &&<Route path="frontend/admin/viewProfile/:id" element={<ViewProfile />} />}
                 {valid &&<Route path="frontend/admin/settings" element={<Settings />} />}

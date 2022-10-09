@@ -11,23 +11,30 @@ import axios from 'axios';
 import { Backend_url, Cloudinary_url } from '../../Config'
 import CoursesList from './CoursesList';
 import Trainee from './trainee/Trainee';
+import jwtDecode from 'jwt-decode';
 
 const Admin = () => {
   const navigate = useNavigate()
   const [navVal, setNavVal] = useState('newStudents')
   const [user, setUser] = useState([])
 
+  
   useEffect(() => {
-   
-      setUser(JSON.parse(localStorage.getItem('userDetails')))
-    
+    if (localStorage.getItem('userDetails')) {
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+        .then(res => {
+
+          setUser(res.data)
+        })
+
+    }
+
   }, [])
 
-  useEffect(()=>{
-    if(!JSON.parse(localStorage.getItem('userDetails')).is_superuser){
-        navigate('/')
-    }
-})
+
+
+
+
 
   const [newStudents, setNewStudents] = useState([])
   useEffect(() => {

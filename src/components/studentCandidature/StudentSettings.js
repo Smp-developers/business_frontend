@@ -1,6 +1,9 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Popup from '../popup/Popup'
+import { Backend_url } from '../../Config'
+import jwtDecode from 'jwt-decode'
 
 const StudentSettings = () => {
     const navigate = useNavigate()
@@ -9,10 +12,15 @@ const StudentSettings = () => {
     const [user, setUser] = useState([])
     useEffect(() => {
         if (localStorage.getItem('userDetails')) {
-            setUser(JSON.parse(localStorage.getItem('userDetails')))
+          axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+            .then(res => {
+    
+              setUser(res.data)
+            })
+    
         }
-        
-    }, [])
+    
+      }, [])
     return (
         <div>
 
@@ -25,27 +33,7 @@ const StudentSettings = () => {
                     <div className="em">{user.email}</div>
                 </div>
 
-                <div className="endside">
-
-                    <div className="dotsIcon">
-
-                        <div
-                            style={{
-                                float: "right",
-                                marginRight: "20px",
-                                color: "white",
-                                cursor: "pointer",
-                                position: "relative",
-                            }}
-                            className="add"
-
-
-                        >
-
-
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div style={{ padding: "20px", marginTop: "10px",display:"flex",flexWrap:"wrap", gap:"10px"}} className="">
                 <div><span style={{ color: "red", fontSize: "18px", fontWeight: "600" }}>Note:</span> Edit your profile here</div>
