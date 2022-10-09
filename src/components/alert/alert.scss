@@ -24,13 +24,13 @@
     bottom: 0px;
     left: 0;
     width: 50% !important;
-    animation-name: move;
+    animation-name: moved;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     
 
-    @keyframes move {
+    @keyframes moved {
       0% {
         transform: translateX(0%);
         background:  #0cc45c;

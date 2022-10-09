@@ -21,6 +21,7 @@ import AltSidebar from "./components/sidebar/AltSidebar";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import { Backend_url } from "./Config";
+import AltSignup from "./components/common/AltSignup";
 
 
 const App = () => {
@@ -66,11 +67,16 @@ useEffect(() => {
           <div className="homeContainer" >
           <AltSidebar />
 
-            <div style={{ padding: "10px 0px" }} className="routeContainer">
+            <div style={{ padding: "10px" }} className="routeContainer">
               <Routes>
                 <Route index element={<Home />} />
                 {!user && <Route path="login" element={<Login />} />}
-                {!user && <Route path="signup" element={<Signup />} />}
+
+                {/* ONCE MEETING SET PLEASE ACTIVATE THIS ROUTE INSTEAD OF ALTSIGNUP */}
+
+                {/* {!user && <Route path="signup" element={<Signup />} />} */}
+
+                {!user && <Route path="signup" element={<AltSignup />} />}
                 
                 {user &&<Route path="candidature" element={<StudentCandidature />} />}
                 {user &&<Route path="common/settings" element={<StudentSettings />} />}
