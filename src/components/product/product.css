@@ -26,6 +26,7 @@
 
 .p-img {
   width: 100%;
+  object-fit: cover;
   transition: all 10s ease;
 }
 

@@ -6,8 +6,7 @@
 .home {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex !important;
-  flex-direction: row !important;
+  display: flex;
 }
 
 .home .homeContainer {

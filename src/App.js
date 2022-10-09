@@ -60,12 +60,12 @@ useEffect(() => {
     <div>
       <BrowserRouter>
       
-        <div className="home">
+        <div className="home" style={{display:"flex"}}>
           <Sidebar />
-          <div className="homeContainer" >
+          <div className="homeContainer">
           <AltSidebar />
 
-            <div style={{ padding: "10px" }} className="routeContainer">
+            <div style={{ padding: "0px" }} className="routeContainer">
               <Routes>
                 <Route index element={<Home />} />
                 {!user && <Route path="login" element={<Login />} />}

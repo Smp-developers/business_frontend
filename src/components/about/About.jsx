@@ -8,34 +8,20 @@ const About = () => {
         <div className="a-card bg"></div>
         <div className="a-card">
           <img
-            src="https://images.pexels.com/photos/3585047/pexels-photo-3585047.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+            src="https://tetacourse.com/uploads/mini/full/8a/1629611190_react-js-and-python-django-full-stack-master-course.webp"
             alt=""
             className="a-img"
+            style={{objectFit:"contain"}}
           />
         </div>
       </div>
       <div className="a-right">
-        <h1 className="a-title">About Me</h1>
+        <h1 className="a-title">About SMP</h1>
         <p className="a-sub">
-          It is a long established fact that a reader will be distracted by the
-          readable content.
+         It is a known fact that the leading technologies become a costly one to learn. In fact it should be costly because of the demand. For example to learn the Django+react full stack it leads to pay of 35,000 per course.<br /> But lot of students wont able to pay that much. For those here we are to help we started a best ever course designing platform where you can learn complete DJANGO + REACT + GIT + PROJECT with less amount. Contact us for details.
         </p>
-        <p className="a-desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat duis aute irure dolor in reprehende.
-        </p>
-        <div className="a-award">
-          <img src={'https://res.cloudinary.com/dqajigt6s/main_logo_vheqme_j3hi9m.png'} alt="" className="a-award-img" />
-          <div className="a-award-texts">
-            <h4 className="a-award-title">International Design Awards 2021</h4>
-            <p className="a-award-desc">
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur autodit
-              and fugit.
-            </p>
-          </div>
-        </div>
+      
+        
       </div>
     </div>
   );

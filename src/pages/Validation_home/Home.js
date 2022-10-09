@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import About from "../../components/about/About";
 import Contact from "../../components/contact/Contact";
 import Intro from "../../components/intro/Intro";
@@ -9,6 +9,7 @@ import { ThemeContext } from "../../context.js";
 const Home = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+ 
   return (
     <div
       style={{

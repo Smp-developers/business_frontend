@@ -50,11 +50,11 @@
   font-weight: 200;
 }
 
-form {
+.form {
   margin-top: 20px;
 }
 
-input {
+.inputs {
   width: 50%;
   height: 50px;
   border: none;
@@ -64,7 +64,7 @@ input {
   padding-left: 10px;
 }
 
-textarea {
+.textarea {
   width: 100%;
   margin: 10px 0px;
   font-size: 14px;
