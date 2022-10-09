@@ -1,39 +1,27 @@
-import "./home.scss";
-
-import { Backend_url, Cloudinary_url } from "../../Config";
-import { styled } from "@mui/material/styles";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import NativeSelect from "@mui/material/NativeSelect";
-import InputBase from "@mui/material/InputBase";
-import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
-import { Button, Input, Modal } from "antd";
-// import './style.css'
-import {
-  Paper,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@mui/material";
-import { useNavigate } from "react-router";
-
-import axios from "axios";
-// added home
+import { useContext } from "react";
+import About from "../../components/about/About";
+import Contact from "../../components/contact/Contact";
+import Intro from "../../components/intro/Intro";
+import ProductList from "../../components/productList/ProductList";
+import Toggle from "../../components/toggle/Toggle";
+import { ThemeContext } from "../../context.js";
 
 const Home = () => {
-
-
-
-
-
+  const theme = useContext(ThemeContext);
+  const darkMode = theme.state.darkMode;
   return (
-    <div className="homeS">
-     
+    <div
+      style={{
+        backgroundColor: darkMode ? "#222" : "white",
+        color: darkMode && "white"
+       
+      }}
+    >
+      <Toggle />
+      <Intro />
+      <About />
+      <ProductList />
+      <Contact />
     </div>
   );
 };
