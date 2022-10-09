@@ -11,12 +11,25 @@ import jwtDecode from "jwt-decode";
 const Sidebar = () => {
   const [cross, setCross] = useState("bar");
   const [user, setUser] = useState([])
+  
   useEffect(() => {
+    
     if (localStorage.getItem('userDetails')) {
-      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+      { headers: { 
+        "Content-Type": "application/json",
+        
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+      )
       .then(res=>{
       
-        setUser(prev=>[...prev,res.data])
+        if(res.status === 200){
+          setUser(prev=>[...prev,res.data])
+        }
+        else if(res.statusText === 'Unauthorized'){
+          localStorage.removeItem('userDetails')
+          navigate('/login')
+        }
       })
      
     }

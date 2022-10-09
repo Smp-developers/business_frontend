@@ -46,7 +46,15 @@ const StudentCandidature = () => {
 
   useEffect(() => {
     if (localStorage.getItem('userDetails')) {
-      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+      { headers: { 
+        "Content-Type": "application/json",
+
+
+        //SENDING AUTHORIZED ACCESS TOKEN TO GET THE RESULT
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+      
+      )
         .then(res => {
 
           setUser(res.data)
@@ -57,7 +65,14 @@ const StudentCandidature = () => {
   }, [])
 
   useEffect(() => {
-    axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`).then(res => {
+    axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+    { headers: { 
+      "Content-Type": "application/json",
+
+
+      //SENDING AUTHORIZED ACCESS TOKEN TO GET THE RESULT
+      "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+    ).then(res => {
       setUserDetails(res.data)
     })
   }, [])

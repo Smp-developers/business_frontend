@@ -186,7 +186,7 @@ const Settings = () => {
           </div>
           <div style={{ padding: "20px", marginTop: "10px", display: "flex", flexWrap: "wrap", gap: "10px" }} className="visi">
             <div><span style={{ color: "red", fontSize: "18px", fontWeight: "600" }}>Note:</span> Edit your profile here</div>
-            <div><Link to="/frontend/editAdmin"><button className="sendIn" >Edit Profile</button></Link></div>
+            <div><Link to="/edit"><button className="sendIn" >Edit Profile</button></Link></div>
           </div>
           <div style={{ padding: "20px", marginTop: "10px", display: "flex", flexWrap: "wrap", gap: "10px" }} className="visi">
             <div><span style={{ color: "red", fontSize: "18px", fontWeight: "600" }}>Note:</span> Change your password</div>

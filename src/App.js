@@ -27,13 +27,21 @@ import AltSignup from "./components/common/AltSignup";
 const App = () => {
   const [valid, setValid] = useState(false)
  const [user,setUser] = useState(false)
+  const [loading,setLoading] = useState(true)
   
-
   
 useEffect(() => {
     if (localStorage.getItem('userDetails')) {
       setUser(true)
-      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+      { headers: { 
+        "Content-Type": "application/json",
+
+
+        //SENDING AUTHORIZED ACCESS TOKEN TO GET THE RESULT
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+      
+      )
       .then(res=>{
       
        if(res.data.is_superuser){
@@ -45,16 +53,42 @@ useEffect(() => {
 
   }, [])
 
-// useEffect(() => {
-//     if (localStorage.getItem('userDetails')) {
-//     const  interval =  setInterval(()=>{
-//           localStorage.removeItem('userDetails')
-//       },5000)
-//       return ()=>clearInterval(interval)
-//     }
-   
 
-// }, [])
+
+
+const updateToken =  ()=>{
+  console.log('updated token')
+ if(localStorage.getItem('userDetails')){
+   axios.post(`${Backend_url}/api/token/refresh/`, {
+    "refresh":JSON.parse(localStorage.getItem('userDetails')).refresh
+ 
+   }).then(res=>{
+    
+    if(res.status === 200){
+      localStorage.setItem('userDetails', JSON.stringify(res.data))
+      
+    }
+    else{
+      window.location.reload()
+      localStorage.removeItem('userDetails')
+     
+    }
+
+     
+   })
+ }
+}
+
+
+useEffect(()=>{
+  let count = 1000*60*14
+  let interval = setInterval(()=>{
+    if(localStorage.getItem('userDetails')){
+      updateToken()
+    }
+  },count)
+ return ()=>clearInterval(interval)
+},[loading])
 
   
  
@@ -74,9 +108,9 @@ useEffect(() => {
 
                 {/* ONCE MEETING SET PLEASE ACTIVATE THIS ROUTE INSTEAD OF ALTSIGNUP */}
 
-                {/* {!user && <Route path="signup" element={<Signup />} />} */}
+                {!user && <Route path="signup" element={<Signup />} />}
 
-                {!user && <Route path="signup" element={<AltSignup />} />}
+                {/* {!user && <Route path="signup" element={<AltSignup />} />} */}
                 
                 {user &&<Route path="candidature" element={<StudentCandidature />} />}
                 {user &&<Route path="common/settings" element={<StudentSettings />} />}

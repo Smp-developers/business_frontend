@@ -10,7 +10,15 @@ const AltSidebar = () => {
    
   useEffect(() => {
     if (localStorage.getItem('userDetails')) {
-      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+      
+      { headers: { 
+        "Content-Type": "application/json",
+
+
+        //SENDING AUTHORIZED ACCESS TOKEN TO GET THE RESULT
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+      )
         .then(res => {
 
           setUser(prev=>[...prev,res.data])
