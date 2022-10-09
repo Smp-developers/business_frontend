@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Sidebar from '../src/components/sidebar/Sidebar'
 import Home from "./pages/Validation_home/Home";
 import './App.css'
+import './pages/Validation_home/home.css'
 import Login from "./components/common/Login";
 import Signup from './components/common/Signup'
 
@@ -60,12 +61,12 @@ useEffect(() => {
     <div>
       <BrowserRouter>
       
-        <div className="home" style={{display:"flex"}}>
+        <div className="home">
           <Sidebar />
-          <div className="homeContainer">
+          <div className="homeContainer" >
           <AltSidebar />
 
-            <div style={{ padding: "0px" }} className="routeContainer">
+            <div style={{ padding: "10px 0px" }} className="routeContainer">
               <Routes>
                 <Route index element={<Home />} />
                 {!user && <Route path="login" element={<Login />} />}

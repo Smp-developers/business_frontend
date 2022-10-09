@@ -155,7 +155,7 @@ const Sidebar = () => {
               if (window.confirm('Do yo want to logout')) {
                 localStorage.removeItem('userDetails')
                 
-                navigate('/')
+                navigate('/login')
                 window.location.reload()
               }
             }}></i>
