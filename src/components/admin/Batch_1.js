@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import Chart from "../chart/Chart";
 import { Backend_url } from "../../Config";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
 
-const Batch_1 = ({ batch1 }) => {
+const Batch_1 = ({  }) => {
     const [search, setSearch] = useState("");
     const [columns, setColumns] = useState([]);
     const [searchC, setSearchC] = useState([]);
@@ -25,6 +25,16 @@ const Batch_1 = ({ batch1 }) => {
     const [color, setColor] = useState('')
     const [load,setLoad] = useState(false)
 
+
+const navigate = useNavigate()
+    const [batch1, setBatch1] = useState([])
+    useEffect(() => {
+        setLoad(true)
+      axios.get(`${Backend_url}/api/get_all_batch1/`).then((res) => {
+        setLoad(false)
+        setBatch1(res.data)
+      })
+    }, [])
 
     const sendingMailToAll = (e) => {
         setLoad(true)
@@ -67,7 +77,7 @@ SMP Developers
 
 
 
-    const sendPaymentMail = (email,payment,name) =>{
+    const sendPaymentMail = (email,id,payment,name) =>{
         axios.post(`${Backend_url}/api/sending_individual_mail`,
                 {"subject":"Your Payment Update", "message": 
 `
@@ -84,7 +94,8 @@ SMP Developers
             ).then(res=>{
                 setTimeout(() => {
                     setTrans('-100px')
-                    window.location.reload()
+                    
+                   navigate(`viewProfile/${id}`)
                 }, 3000)
             })
       
@@ -104,7 +115,7 @@ SMP Developers
                 setColor("green")
                 setTrans('0px')
                 setMsg(`payment for ${email} is updated to ${payment} Successfully.....`)
-                sendPaymentMail(email,payment,name)
+                sendPaymentMail(email,id,payment,name)
 
                 
             }).catch(err=>{

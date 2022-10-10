@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { Cloudinary_url,Backend_url } from '../../Config'
 import Alert from '../alert/Alert'
@@ -7,7 +7,7 @@ import Loader from "../loader/Loader";
 
 
 
-const CoursesList = ({ courses }) => {
+const CoursesList = ({  }) => {
 
   const [load,setLoad] = useState(false)
   const [msg, setMsg] = useState('')
@@ -15,6 +15,18 @@ const CoursesList = ({ courses }) => {
   const [color, setColor] = useState('')
 
   const navigate = useNavigate()
+
+
+
+  const [courses, setCourses] = useState([])
+  useEffect(() => {
+    setLoad(true)
+    axios.get(`${Backend_url}/api/get_all_courses/`).then((res) => {
+      setLoad(false)
+      setCourses(res.data)
+      
+    })
+  }, [])
 
   const delete_course=(id,name)=>{
 if(window.confirm(`Do you Want delete ${name}`)){

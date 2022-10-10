@@ -4,6 +4,7 @@ import axios from 'axios'
 import Trainee_list from './Trainee_list'
 
 import UploadTrainee from './UploadTrainee'
+import Loader from '../../loader/Loader'
 
 const Trainee = () => {
   const [contentVal, setContentVal] = useState('trainee_list')
@@ -11,10 +12,14 @@ const Trainee = () => {
 
   }, [])
 
+  const [load,setLoad] = useState(false)
 
   const [trainees, setTrainees] = useState([])
   useEffect(() => {
+    
+    setLoad(true)
     axios.get(`${Backend_url}/api/get_all_trainees`).then((res) => {
+      setLoad(false)
       setTrainees(res.data)
       
     })
@@ -22,6 +27,7 @@ const Trainee = () => {
 
   return (
     <div className='traineeContainer'>
+    {load===true && <Loader />}
       <div className='topTrainee'><div className="addTrainee">
         <div>
           <i className="fa-solid fa-plus"  onClick={e => { setContentVal('add') }}></i>

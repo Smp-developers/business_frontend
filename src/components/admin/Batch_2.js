@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import Chart from "../chart/Chart";
 import { Backend_url } from "../../Config";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
 
-const Batch_2 = ({ batch2 }) => {
+const Batch_2 = ({  }) => {
     const [load, setLoad] = useState(false)
     const [search, setSearch] = useState("");
     const [columns, setColumns] = useState([]);
@@ -25,6 +25,18 @@ const Batch_2 = ({ batch2 }) => {
     const [trans, setTrans] = useState('')
     const [color, setColor] = useState('')
 
+
+
+    const navigate = useNavigate()
+
+    const [batch2, setBatch2] = useState([])
+    useEffect(() => {
+        setLoad(true)
+      axios.get(`${Backend_url}/api/get_all_batch2/`).then((res) => {
+        setLoad(false)
+        setBatch2(res.data)
+      })
+    }, [])
 
     const sendingMailToAll = (e) => {
         setLoad(true)
@@ -65,7 +77,7 @@ SMP Developers
             })
     }
 
-    const sendPaymentMail = (email,payment,name) =>{
+    const sendPaymentMail = (email,id,payment,name) =>{
         axios.post(`${Backend_url}/api/sending_individual_mail`,
                 { "subject":"Your Payment Update","message": 
 `
@@ -82,7 +94,7 @@ SMP Developers
             ).then(res=>{
                 setTimeout(() => {
                     setTrans('-100px')
-                    window.location.reload()
+                    navigate(`viewProfile/${id}`)
                 }, 3000)
             })
       
@@ -105,7 +117,7 @@ SMP Developers
                 setMsg(`payment for ${email} is updated to ${payment} Successfully.....`)
 
 
-                sendPaymentMail(email,payment,name)
+                sendPaymentMail(email,id,payment,name)
             }).catch(err => {
                 setColor("red")
                 setTrans('0px')

@@ -12,14 +12,17 @@ import { Backend_url, Cloudinary_url } from '../../Config'
 import CoursesList from './CoursesList';
 import Trainee from './trainee/Trainee';
 import jwtDecode from 'jwt-decode';
+import Loader from '../loader/Loader';
 
 const Admin = () => {
   const navigate = useNavigate()
-  const [navVal, setNavVal] = useState('newStudents')
+  const [navVal, setNavVal] = useState('')
   const [user, setUser] = useState([])
+  const [load, setLoad] = useState(false)
 
   
   useEffect(() => {
+    setLoad(true)
     if (localStorage.getItem('userDetails')) {
       axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
       { headers: { 
@@ -31,7 +34,7 @@ const Admin = () => {
       
       )
         .then(res => {
-
+          setLoad(false)
           setUser(res.data)
         })
 
@@ -44,39 +47,20 @@ const Admin = () => {
 
 
 
-  const [newStudents, setNewStudents] = useState([])
-  useEffect(() => {
-    axios.get(`${Backend_url}/api/get_none_batches/`).then((res) => {
-      setNewStudents(res.data)
-    })
-  }, [])
+  
 
 
-  const [batch1, setBatch1] = useState([])
-  useEffect(() => {
-    axios.get(`${Backend_url}/api/get_all_batch1/`).then((res) => {
-      setBatch1(res.data)
-    })
-  }, [])
 
-  const [batch2, setBatch2] = useState([])
-  useEffect(() => {
-    axios.get(`${Backend_url}/api/get_all_batch2/`).then((res) => {
-      setBatch2(res.data)
-    })
-  }, [])
 
-  const [courses, setCourses] = useState([])
-  useEffect(() => {
-    axios.get(`${Backend_url}/api/get_all_courses/`).then((res) => {
-      setCourses(res.data)
-      
-    })
-  }, [])
+ 
+
+ 
 
 
   return (
     <div>
+     
+            {load === true && <Loader />}
       <div className="topNavbar">
         <div className="icons">
           <i className="fa-solid fa-book-open"></i>
@@ -143,11 +127,11 @@ const Admin = () => {
           </ul>
         </div>
         <div className="decider">
-          {navVal === 'newStudents' && <NewStudents newStudents={newStudents} />}
-          {navVal === 'batch1' && <Batch_1 batch1={batch1} />}
-          {navVal === 'batch2' && <Batch_2 batch2={batch2} />}
+          {navVal === 'newStudents' && <NewStudents  />}
+          {navVal === 'batch1' && <Batch_1  />}
+          {navVal === 'batch2' && <Batch_2 />}
           {navVal === 'courseUpload' && <Courses />}
-          {navVal === 'courses' && <CoursesList courses={courses} setNavVal={setNavVal} />}
+          {navVal === 'courses' && <CoursesList  />}
           {navVal === 'trainee' && <Trainee />}
         </div>
       </div>

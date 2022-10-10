@@ -19,6 +19,7 @@ const ViewProfile = () => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
+        setLoad(true)
         if (localStorage.getItem('userDetails')) {
           axios.get(`${Backend_url}/api/getting_single_students/${id}`,
           { headers: { 
@@ -27,13 +28,13 @@ const ViewProfile = () => {
             "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
           )
           .then(res=>{
-          
+            setLoad(false)
             setUser(res.data)
           })
          
         }
     
-      }, [])
+      }, [id])
 
 
 
@@ -72,7 +73,7 @@ SMP Developers
                     setTrans('-100px')
 
 
-                    navigate('/admin')
+                    navigate('/frontend/admin')
 
 
                 }, 3000)
