@@ -11,10 +11,12 @@ import jwtDecode from "jwt-decode";
 const Sidebar = () => {
   const [cross, setCross] = useState("bar");
   const [user, setUser] = useState([])
+  const [loc,setLoc] = useState(false)
   
   useEffect(() => {
     
     if (localStorage.getItem('userDetails')) {
+      setLoc(true)
       axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
       { headers: { 
         "Content-Type": "application/json",
@@ -112,7 +114,7 @@ const Sidebar = () => {
 
         <div className="">
           <ul>
-            {user.length === 0 && <li
+            {user.length === 0 && !loc && <li
               onClick={() => {
                 navigate("/login");
               }}
