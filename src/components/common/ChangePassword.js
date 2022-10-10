@@ -34,7 +34,12 @@ const ChangePassword = () => {
   const [user, setUser] = useState([])
   useEffect(() => {
     if (localStorage.getItem('userDetails')) {
-      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`)
+      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+      { headers: { 
+        "Content-Type": "application/json",
+        
+        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+      )
       .then(res=>{
       
         setUser(res.data)
@@ -112,7 +117,7 @@ const ChangePassword = () => {
     }).catch(err => {
       setColor("red")
       setTrans('0px')
-      setMsg('Error in sending mail')
+      setMsg('Error in verify')
 
       setTimeout(() => {
 
