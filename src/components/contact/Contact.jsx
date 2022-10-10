@@ -45,12 +45,14 @@ my number is ${number}
       setTrans('0px')
       setMsg(`Batch update request sent successfully.......`)
 
-
+      setDone(true)
       setTimeout(() => {
         setLoad(false)
         setTrans('-100px')
         setLoad(false)
-        window.location.reload()
+        setNumber('')
+        setMessage('')
+        setEmail('')
 
 
 
@@ -101,9 +103,9 @@ my number is ${number}
             <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="email" placeholder="Email" name="user_email" onChange={e=>{setEmail(e.target.value)}}/>
             <textarea className="textarea" style={{backgroundColor: darkMode && "#333"}} rows="5" placeholder="Message" name="message" onChange={e=>{setMessage(e.target.value)}}/>
             {(email !=='' && message !=='' && number !=='' && name !=='')?
-            <button onClick={handleSubmit}>Submit</button>
+            <button onClick={handleSubmit} className="Cbutton">Submit</button>
             :
-            <><button style={{background:"red",cursor:"not-allowed"}}>Submit</button> <span>Fill details to send</span> </>
+            <><button className="Cbutton" style={{background:"red",cursor:"not-allowed"}}>Submit</button> <span>Fill details to send</span> </>
             }
             {done && "Thank you..."}
           </div>
