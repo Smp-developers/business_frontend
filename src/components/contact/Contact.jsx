@@ -53,10 +53,18 @@ my number is ${number}
         setNumber('')
         setMessage('')
         setEmail('')
+        
 
 
 
       }, 3000)
+      setTimeout(() => {
+        setDone(false)
+        
+
+
+
+      }, 10000)
     }).catch(err => {
       setColor("red")
       setTrans('0px')
@@ -98,16 +106,20 @@ my number is ${number}
             <b>What’s your intrest about this course?</b> Get in touch with us. For course detailed structure.
           </p>
           <div className='form' >
-            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Name" name="user_name" onChange={e=>{setName(e.target.value)}} />
-            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Number" name="user_subject" onChange={e=>{setNumber(e.target.value)}} />
-            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="email" placeholder="Email" name="user_email" onChange={e=>{setEmail(e.target.value)}}/>
-            <textarea className="textarea" style={{backgroundColor: darkMode && "#333"}} rows="5" placeholder="Message" name="message" onChange={e=>{setMessage(e.target.value)}}/>
+            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Name" name="user_name" value={name} onChange={e=>{setName(e.target.value)}} />
+            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Number" name="user_subject" value={number} onChange={e=>{setNumber(e.target.value)}} />
+            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="email" placeholder="Email" name="user_email" value={email} onChange={e=>{setEmail(e.target.value)}}/>
+            <textarea className="textarea" style={{backgroundColor: darkMode && "#333"}} rows="5" placeholder="Message" name="message" value={message} onChange={e=>{setMessage(e.target.value)}}/>
             {(email !=='' && message !=='' && number !=='' && name !=='')?
             <button onClick={handleSubmit} className="Cbutton">Submit</button>
+            
             :
-            <><button className="Cbutton" style={{background:"red",cursor:"not-allowed"}}>Submit</button> <span>Fill details to send</span> </>
+            <>
+            <button className="Cbutton" style={{background:"red",cursor:"not-allowed"}}>Submit</button> 
+            {done ? <span style={{color:"green",fontWeight:"600",display:"block"}}>Thank you we received your mail we will get back to you...</span>: <span style={{color:"red",fontWeight:"600",display:"block"}}>Fill details to send</span> }
+            </>
             }
-            {done && "Thank you..."}
+            
           </div>
         </div>
       </div>
