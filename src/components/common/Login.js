@@ -225,7 +225,7 @@ SMP Developers
                   <i className="fa-solid fa-xmark"></i>
                 </div></>
             } */}
-            <Link to='/forgotpassword' style={{marginTop:"10px",marginLeft:"180px"}}>Forgot password</Link>
+            <Link to='/forgotpassword' style={{marginTop:"10px",marginLeft:"10px"}}>Forgot password</Link>
           </div>
           {(email !== '' && password !== '' )
             &&
