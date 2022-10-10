@@ -245,7 +245,7 @@ SMP Developers
 
           <span>Dont have account?</span>
 
-          <span><Link to='/signup'>Sign up</Link></span>
+          <span style={{marginLeft:"-20px"}}><Link to='/signup'>Sign up</Link></span>
 
         </div>
       </div>
