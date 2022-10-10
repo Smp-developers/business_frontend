@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router'
 import { Backend_url, Cloudinary_url } from '../../Config'
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
+import jwtDecode from 'jwt-decode'
 const ViewProfile = () => {
     const { id } = useParams()
     const [user, setUser] = useState([])
@@ -18,10 +19,21 @@ const ViewProfile = () => {
     const [message, setMessage] = useState('')
 
     useEffect(() => {
-        axios.get(`${Backend_url}/api/getting_single_students/${id}`).then(res => {
+        if (localStorage.getItem('userDetails')) {
+          axios.get(`${Backend_url}/api/getting_single_students/${id}`,
+          { headers: { 
+            "Content-Type": "application/json",
+            
+            "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+          )
+          .then(res=>{
+          
             setUser(res.data)
-        })
-    }, [id])
+          })
+         
+        }
+    
+      }, [])
 
 
 
