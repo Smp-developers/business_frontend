@@ -28,8 +28,9 @@
 }
 
 .c-title {
-  font-size: 60px;
-  width: 80%;
+  font-size: 28px;
+  width: 100%;
+  font-weight: 600;
 }
 
 .c-info-item {
