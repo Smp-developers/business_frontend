@@ -8,7 +8,7 @@ const About = () => {
         <div className="a-card bg"></div>
         <div className="a-card">
           <img
-            src="https://tetacourse.com/uploads/mini/full/8a/1629611190_react-js-and-python-django-full-stack-master-course.webp"
+            src="https://res.cloudinary.com/dqajigt6s/main_logo_vheqme_j3hi9m.png"
             alt=""
             className="a-img"
             style={{objectFit:"contain"}}
