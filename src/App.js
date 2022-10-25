@@ -108,9 +108,9 @@ useEffect(()=>{
 
                 {/* ONCE MEETING SET PLEASE ACTIVATE THIS ROUTE INSTEAD OF ALTSIGNUP */}
 
-                {/* {!user && <Route path="signup" element={<Signup />} />} */}
+                {!user && <Route path="signup" element={<Signup />} />}
 
-                {!user && <Route path="signup" element={<AltSignup />} />}
+                {/* {!user && <Route path="signup" element={<AltSignup />} />} */}
                 
                 {user &&<Route path="candidature" element={<StudentCandidature />} />}
                 {user &&<Route path="common/settings" element={<StudentSettings />} />}
