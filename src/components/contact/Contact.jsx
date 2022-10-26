@@ -95,8 +95,8 @@ my number is ${number}
             <a href="https://api.whatsapp.com/send?phone=9490722524" style={{fontSize:"14px"}}>Send Message in 9490722524</a>
             </div>
             <div className="c-info-item">
-              <img className="c-icon" src={'https://cdn-icons-png.flaticon.com/512/761/761755.png'} alt="" />
-              <a href="mailto:smpdevelopers.official@gmail.com" style={{fontSize:"14px"}}>smpdevelopers.official@gmail.com</a>
+              {/* <img className="c-icon" src={'https://cdn-icons-png.flaticon.com/512/761/761755.png'} alt="" />
+              <a href="mailto:smpdevelopers.official@gmail.com" style={{fontSize:"14px"}}>smpdevelopers.official@gmail.com</a> */}
             </div>
            
           </div>
