@@ -20,7 +20,7 @@ const Home = () => {
       }}
     >
       <Toggle />
-      <Intro />
+       <Intro />
       <About />
       <ProductList />
       <Contact />

@@ -15,12 +15,15 @@ import ProfileStudent from './ProfileStudent';
 import StudentSchedule from './StudentSchedule';
 import CoursesStudent from './CoursesStudent';
 import jwtDecode from 'jwt-decode';
+import Loader from '../loader/Loader';
 
 
 const StudentCandidature = () => {
   const navigate = useNavigate()
   const [navVal, setNavVal] = useState('schedules')
   const [user, setUser] = useState([])
+
+  const [load,setLoad] = useState(false)
 
 
   const [batchTrainers, setBatchTrainers] = useState([])
@@ -45,7 +48,9 @@ const StudentCandidature = () => {
 
 
   useEffect(() => {
+    setLoad(true)
     if (localStorage.getItem('userDetails')) {
+      
       axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
       { headers: { 
         "Content-Type": "application/json",
@@ -58,6 +63,7 @@ const StudentCandidature = () => {
         .then(res => {
 
           setUser(res.data)
+          setLoad(false)
         })
 
     }
@@ -109,6 +115,7 @@ const StudentCandidature = () => {
 
   return (
     <div>
+    {load && <Loader />}
 
 
       <div className="topNavbar">

@@ -75,8 +75,9 @@ const ChangePassword = () => {
       setTimeout(() => {
         setTrans('-100px')
         localStorage.removeItem('userDetails')
-        window.location.reload()
+        
         navigate('/login')
+        window.location.reload()
 
 
       }, 3000)
@@ -103,8 +104,8 @@ const ChangePassword = () => {
 
 
   const checkPass = (e) => {
-    axios.post(`${Backend_url}/api/check_original_password`,
-      { "password": password, "enc_password": user.password }
+    axios.post(`${Backend_url}/api/check_original_password/${user.email}`,
+      { "password": password }
     ).then(res => {
       if (res.data === 'success') {
         document.getElementById('passI').style.border = '2px solid green'
@@ -151,7 +152,7 @@ const ChangePassword = () => {
             <label> Current Password</label>
             {!visible ?
               <div style={{ position: "relative" }} >
-                <input type="password" value={password} id="passI" placeholder='Enter Current password'
+                <input type="password" value={password} id="passI" placeholder='Enter new password'
                   onChange={e => {
                     setPassword(e.target.value)
 

@@ -92,11 +92,11 @@ my number is ${number}
             <div className="c-info-item">
               <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc_FMyxjAaI94R5vnM7BF0K5kdvz8JCv5iJV-DLtw&s'} alt="" className="c-icon" />
             
-            <a href="https://api.whatsapp.com/send?phone=9490722524">Send Message in 9490722524</a>
+            <a href="https://api.whatsapp.com/send?phone=9490722524" style={{fontSize:"14px"}}>Send Message in 9490722524</a>
             </div>
             <div className="c-info-item">
               <img className="c-icon" src={'https://cdn-icons-png.flaticon.com/512/761/761755.png'} alt="" />
-              <a href="mailto:smpdevelopers.official@gmail.com">smpdevelopers.official@gmail.com</a>
+              <a href="mailto:smpdevelopers.official@gmail.com" style={{fontSize:"14px"}}>smpdevelopers.official@gmail.com</a>
             </div>
            
           </div>

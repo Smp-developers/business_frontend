@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './popup.scss'
 
 import { Backend_url } from '../../Config'
-import {  useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import jwtDecode from 'jwt-decode'
 
 const Popup = ({ setShowModal }) => {
@@ -15,26 +15,26 @@ const Popup = ({ setShowModal }) => {
     useEffect(() => {
         if (localStorage.getItem('userDetails')) {
             setEncPassword(jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).password)
-            
+
         }
     }, [])
-const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const handlePassword = (e) => {
         document.getElementById('passI').classList.remove('successs')
         document.getElementById('passI').classList.remove('fails')
-        axios.post(`${Backend_url}/api/check_original_password`,
-            { "password": password, "enc_password": enc_password }
-        ).then(res=>{
-            if(res.data==='success'){
+        axios.post(`${Backend_url}/api/check_original_password/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).email}`,
+            { "password": password }
+        ).then(res => {
+            if (res.data === 'success') {
                 document.getElementById('passI').classList.add('successs')
-                setTimeout(()=>{
+                setTimeout(() => {
                     setShowModal(false)
-                },1000)
+                }, 1000)
             }
-            else{
+            else {
                 document.getElementById('passI').classList.add('fails')
-                
+
             }
         })
     }
@@ -51,7 +51,7 @@ const navigate = useNavigate()
                     {!visible ?
                         <>
                             <div style={{ position: "relative" }} >
-                                <input type="password" value={password} id="passI" 
+                                <input type="password" value={password} id="passI"
                                     onChange={e => {
                                         setPassword(e.target.value)
 
