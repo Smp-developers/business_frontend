@@ -185,8 +185,8 @@ SMP Developers
     }
 
     const verifyOtp = (e) => {
-
-        if (otp === randomotp) {
+        setOTP(e.target.value)
+        if (e.target.value == randomotp && e.target.value!=='' ) {
             setVerify('success')
         }
         else {
@@ -263,25 +263,26 @@ SMP Developers
 
                             <div className='otp'>
                                 <label>OTP</label>
-                                <input type="text" value={otp} onChange={e => setOTP(e.target.value)} autocomplete="off" placeholder="Enter otp to signup" required />
-                                {otpVerify === '' && otp !== '' &&
+                                <input type="text" value={otp} onChange={e => verifyOtp(e)} autocomplete="off" placeholder="Enter otp to signup" required />
+                                {/* {otpVerify === '' && otp !== '' &&
                                     <div className='verify' onClick={e => { verifyOtp(e) }}>
                                         verify
                                     </div>
-                                }
+                                } */}
                                 {otpVerify === 'success' &&
-                                    <div className='success' onClick={e => { verifyOtp(e) }}>
-                                        <div className='verify' style={{ top: "5px", right: "26px" }} onClick={e => { verifyOtp(e) }}>
+                                    <div className='success'>
+                                        {/* <div className='verify' style={{ top: "5px", right: "26px" }} onClick={e => { verifyOtp(e) }}>
                                             verify
-                                        </div>
+                                        </div> */}
                                         <i class="fa-solid fa-check"></i>
                                     </div>
                                 }
                                 {otpVerify === 'fail' &&
-                                    <><div className='verify danger' onClick={e => { verifyOtp(e) }}>
+                                    <>
+                                    {/* <div className='verify danger' >
                                         verify
-                                    </div>
-                                        <div className='fail' onClick={e => { verifyOtp(e) }}>
+                                    </div> */}
+                                        <div className='fail' >
                                             <i class="fa-solid fa-xmark"></i>
                                         </div></>
                                 }

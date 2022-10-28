@@ -91,6 +91,7 @@ const Signup = () => {
 
 
   const sendOtp = (e) => {
+
     var string = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`;
     let OTP = '';
     var len = string.length;
@@ -113,10 +114,12 @@ Administration Team,
 SMP Developers
 `, "email": email
     }).then(res => {
+      document.getElementById('email').disabled = true
       setColor("green")
       setTrans('0px')
       setMsg(`OTP has been sent successfully.......`)
       setSend('success')
+
 
       setTimeout(() => {
         setLoad(false)
@@ -142,8 +145,8 @@ SMP Developers
   }
 
   const verifyOtp = (e) => {
-
-    if (otp === randomotp) {
+   setOTP(e.target.value)
+    if (e.target.value == randomotp && e.target.value!=='') {
       setVerify('success')
     }
     else {
@@ -175,8 +178,8 @@ SMP Developers
             <>
               <div className='emailContainer'>
                 <label>Email</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} autocomplete="off" placeholder="Email" required />
-                {send === '' && email !== '' && <div className='emailVerify' onClick={e => { sendOtp(e) }}>
+                <input type="email" value={email} id="email" onChange={e => setEmail(e.target.value)} autocomplete="off" placeholder="Email" required />
+                {send === '' && (email.includes('@gmail.com') || email.includes('@outlook.com')) && <div className='emailVerify' onClick={e => { sendOtp(e) }}>
                   send otp
                 </div>}
                 {send === 'success' &&
@@ -224,25 +227,26 @@ SMP Developers
 
               <div className='otp'>
                 <label>OTP</label>
-                <input type="text" value={otp} onChange={e => setOTP(e.target.value)} autocomplete="off" placeholder="Enter otp to signup" required />
-                {otpVerify === '' && otp !== '' &&
+                <input type="text" value={otp} onChange={e =>  verifyOtp(e)} autocomplete="off" placeholder="Enter otp to signup" required />
+                {/* {otpVerify === '' && otp !== '' &&
                   <div className='verify' onClick={e => { verifyOtp(e) }}>
                     verify
                   </div>
-                }
+                } */}
                 {otpVerify === 'success' &&
-                  <div className='success' onClick={e => { verifyOtp(e) }}>
-                    <div className='verify' style={{ top: "5px", right: "26px" }} onClick={e => { verifyOtp(e) }}>
+                  <div className='success' >
+                    {/* <div className='verify' style={{ top: "5px", right: "26px" }} onClick={e => { verifyOtp(e) }}>
                       verify
-                    </div>
+                    </div> */}
                     <i className="fa-solid fa-check"></i>
                   </div>
                 }
                 {otpVerify === 'fail' &&
-                  <><div className='verify danger' onClick={e => { verifyOtp(e) }}>
+                  <>
+                  {/* <div className='verify danger' >
                     verify
-                  </div>
-                    <div className='fail' onClick={e => { verifyOtp(e) }}>
+                  </div> */}
+                    <div className='fail'>
                       <i className="fa-solid fa-xmark"></i>
                     </div></>
                 }
@@ -267,7 +271,7 @@ SMP Developers
               <label>Social Media</label>
               <input type="text" value={social_media} onChange={e => setSocialMedia(e.target.value)} autocomplete="off" placeholder="Social links like instagram, linkedin,github" required />
               <label>Image</label>
-              <input type="file" onChange={e => setImage(e.target.files[0])} required />
+              <input type="file"   onChange={e => setImage(e.target.files[0])} required/>
 
               <button onClick={handleNext} ><i className="fa-solid fa-arrow-left"></i><span>Back</span></button>
 
@@ -279,7 +283,7 @@ SMP Developers
 
               }
               {
-                (email === '' || password === '' || image === "" || graduation === '' || mobile === '' || college === '' || social_media === '' || otpVerify === 'fail')
+                (email === '' || password === '' || image === "" || graduation === '' || mobile === '' || college === '' || social_media === '' || otpVerify !== 'success' )
                 &&
                 <button className='disable' style={{ float: "right" }}><i className="fa-solid fa-right-to-bracket"></i><span>Signup</span></button>
               }
