@@ -275,7 +275,7 @@ SMP Developers
 
               <button onClick={handleNext} ><i className="fa-solid fa-arrow-left"></i><span>Back</span></button>
 
-              {(email !== '' && password !== '' && image !== "" && graduation !== '' && mobile !== '' && college !== '' && social_media !== '' && otpVerify === 'success')
+              {(email !== '' && password !== '' && image !== "" && graduation !== '' && mobile !== '' && college !== '' && otpVerify === 'success')
                 &&
                 (<button onClick={
                   handleSubmit
@@ -283,7 +283,7 @@ SMP Developers
 
               }
               {
-                (email === '' || password === '' || image === "" || graduation === '' || mobile === '' || college === '' || social_media === '' || otpVerify !== 'success' )
+                (email === '' || password === '' || image === "" || graduation === '' || mobile === '' || college === '' ||  otpVerify !== 'success' )
                 &&
                 <button className='disable' style={{ float: "right" }}><i className="fa-solid fa-right-to-bracket"></i><span>Signup</span></button>
               }
