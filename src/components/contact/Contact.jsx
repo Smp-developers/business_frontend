@@ -107,10 +107,11 @@ my number is ${number}
           </p>
           <div className='form' >
             <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Name" name="user_name" value={name} onChange={e=>{setName(e.target.value)}} />
-            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Number" name="user_subject" value={number} onChange={e=>{setNumber(e.target.value)}} />
-            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="email" placeholder="Email" name="user_email" value={email} onChange={e=>{setEmail(e.target.value)}}/>
+            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="text" placeholder="Number" name="user_subject" value={number} onChange={e=>{setNumber(e.target.value)}} /><br />
+            {/* Email Should be  @gmail.com <br /> */}
+            <input className="inputs" style={{backgroundColor: darkMode && "#333"}} type="email" placeholder="Email Should be  @gmail.com " name="user_email" value={email} onChange={e=>{setEmail(e.target.value)}}/>
             <textarea className="textarea" style={{backgroundColor: darkMode && "#333"}} rows="5" placeholder="Message" name="message" value={message} onChange={e=>{setMessage(e.target.value)}}/>
-            {(email !=='' && message !=='' && number !=='' && name !=='')?
+            {(email !=='' && email.includes('@gmail.com') &&message !=='' && number !=='' && name !=='')?
             <button onClick={handleSubmit} className="Cbutton">Submit</button>
             
             :

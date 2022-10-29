@@ -122,6 +122,14 @@ const Sidebar = () => {
               <i className="fa-solid fa-right-to-bracket"></i>
               <span className="side">Login</span>
             </li>}
+            {user.length === 0 && !loc && <li
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              <i className="fa-solid fa-right-to-bracket"></i>
+              <span className="side">Signup</span>
+            </li>}
 
             {/* <li
               onClick={() => {
@@ -158,6 +166,7 @@ const Sidebar = () => {
 
           </ul>
         </div>
+        
         {user.length > 0 && <div className="bottom">
           <div className="item noti">
             <NotificationsNoneOutlinedIcon className="icon" />
