@@ -1,5 +1,5 @@
 .c {
-  height: 200px;
+  height: 100vh;
   position: relative;
 }
 
@@ -82,6 +82,9 @@
 }
 
 @media screen and (max-width: 480px) {
+  .c{
+    height: 200px;
+  }
   .c-wrapper {
     flex-direction: column;
     padding: 0px 50px;
