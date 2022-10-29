@@ -7,27 +7,33 @@ import jwtDecode from 'jwt-decode';
 
 const AltSidebar = () => {
     const [user, setUser] = useState([])
-    const [loc,setLoc] = useState(false)
-  useEffect(() => {
-    if (localStorage.getItem('userDetails')) {
-        setLoc(true)
-      axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
-      
-      { headers: { 
-        "Content-Type": "application/json",
+    const [loc, setLoc] = useState(false)
+    const [loadN,setLoadN] = useState(false)
+
+    useEffect(() => {
+        if (localStorage.getItem('userDetails')) {
+            setLoc(true)
+            setLoadN(true)
+            axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
+
+                {
+                    headers: {
+                        "Content-Type": "application/json",
 
 
-        //SENDING AUTHORIZED ACCESS TOKEN TO GET THE RESULT
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
-      )
-        .then(res => {
+                        //SENDING AUTHORIZED ACCESS TOKEN TO GET THE RESULT
+                        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`
+                    }
+                }
+            )
+                .then(res => {
+                    setLoadN(false)
+                    setUser(prev => [...prev, res.data])
+                })
 
-          setUser(prev=>[...prev,res.data])
-        })
+        }
 
-    }
-
-  }, [])
+    }, [])
 
 
     const hiddenHandle = (e) => {
@@ -37,16 +43,16 @@ const AltSidebar = () => {
     }
 
     const hiddenRemoval = (e) => {
-       if(!e.target.classList.contains('fa-bars')){
-        document.querySelector('.altSidebar').classList.remove('hI')
-        document.querySelector('.hiddenMenu').classList.remove('di')
-       }
+        if (!e.target.classList.contains('fa-bars')) {
+            document.querySelector('.altSidebar').classList.remove('hI')
+            document.querySelector('.hiddenMenu').classList.remove('di')
+        }
 
     }
 
 
 
-    document.body.addEventListener('click',hiddenRemoval)
+    document.body.addEventListener('click', hiddenRemoval)
 
     const navigate = useNavigate();
     return (
@@ -60,7 +66,7 @@ const AltSidebar = () => {
 
             </div>
             <div className='hiddenMenu'>
-                {user.length >0 && user[0].is_superuser && <div
+                {user.length > 0 && user[0].is_superuser && <div
                     style={{
                         float: "right",
                         marginRight: "20px",
@@ -79,7 +85,7 @@ const AltSidebar = () => {
                 </div>}
 
                 <ul>
-                    {user.length === 0 && !loc && <li  
+                    {user.length === 0 && !loc && <li
                         onClick={() => {
                             hiddenHandle()
                             navigate("/login");
@@ -89,7 +95,7 @@ const AltSidebar = () => {
                         <span className="">Login</span>
                     </li>}
 
-                    {user.length === 0 && !loc && <li  
+                    {user.length === 0 && !loc && <li
                         onClick={() => {
                             hiddenHandle()
                             navigate("/signup");
@@ -99,7 +105,9 @@ const AltSidebar = () => {
                         <span className="">Signup</span>
                     </li>}
 
-                    {user.length > 0 && <li  onClick={hiddenHandle}>
+                        {loadN && <div style={{marginLeft:"5px"}}>Fetching your details.....</div>}
+
+                    {user.length > 0 && <li onClick={hiddenHandle}>
                         <img
                             src={`${Cloudinary_url}/${user[0].image}`}
                             width={30} height={30} style={{ borderRadius: "50%" }}
@@ -111,7 +119,7 @@ const AltSidebar = () => {
                     </li>}
 
 
-                    {user.length > 0 && !user[0].is_superuser && <li 
+                    {user.length > 0 && !user[0].is_superuser && <li
                         onClick={() => {
                             hiddenHandle()
                             navigate("/candidature");
