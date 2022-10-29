@@ -270,7 +270,7 @@ SMP Developers
               <input type="text" value={college} onChange={e => setCollege(e.target.value)} autocomplete="off" placeholder="college" required />
               <label>Social Media</label>
               <input type="text" value={social_media} onChange={e => setSocialMedia(e.target.value)} autocomplete="off" placeholder="Social links like instagram, linkedin,github" required />
-              <label>Profile</label>
+              <label>Profile Pic</label>
               <input type="file"   onChange={e => setImage(e.target.files[0])} required/>
 
               <button onClick={handleNext} ><i className="fa-solid fa-arrow-left"></i><span>Back</span></button>
