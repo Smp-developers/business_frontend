@@ -268,7 +268,7 @@ SMP Developers
               <input type="text" value={mobile} onChange={e => setMobile(e.target.value)} autocomplete="off" placeholder="mobile" required />
               <label>college</label>
               <input type="text" value={college} onChange={e => setCollege(e.target.value)} autocomplete="off" placeholder="college" required />
-              <label>Social Media (opional)</label>
+              <label>Social Media (optional)</label>
               <input type="text" value={social_media} onChange={e => setSocialMedia(e.target.value)} autocomplete="off" placeholder="Social links like instagram, linkedin,github" required />
               <label>Profile Pic</label>
               <input type="file"   onChange={e => setImage(e.target.files[0])} required/>
