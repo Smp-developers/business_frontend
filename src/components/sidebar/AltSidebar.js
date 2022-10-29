@@ -89,6 +89,16 @@ const AltSidebar = () => {
                         <span className="">Login</span>
                     </li>}
 
+                    {user.length === 0 && !loc && <li  
+                        onClick={() => {
+                            hiddenHandle()
+                            navigate("/signup");
+                        }}
+                    >
+
+                        <span className="">Signup</span>
+                    </li>}
+
                     {user.length > 0 && <li  onClick={hiddenHandle}>
                         <img
                             src={`${Cloudinary_url}/${user[0].image}`}
