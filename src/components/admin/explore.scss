@@ -1,6 +1,9 @@
 button{
   background-color:#161b22 !important;
 }
+.buttonSuc{
+  background-color:green !important;
+}
 
 .card{
   height:280px !important;
@@ -614,6 +617,29 @@ button{
   }
 }
 
+@media (max-width:600px){
+  .profileAll{
+    .tableContainer{
+      width:100%;
+      input[type="text"]{
+        width:100%;
+      }
+      .tables {
+        .table{
+          .sT{
+            min-width: 250px !important;
+          }
+        }
+        .vP{
+          font-size: 12px !important;
+          white-space: no-wrap;
+        }
+      }
+    }
+  }
+ 
+}
+
 .termsHolder {
   position: absolute;
   left: 280px;
@@ -727,7 +753,31 @@ button{
     margin: 5px auto;
   }
 }
-
+@media (max-width:600px) {
+  .course{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+    input[type="file"] {
+      padding: 10px;
+      margin-left: -170px !important;
+      
+    }
+    input[type="text"]{
+      margin-left: -20px;
+    }
+    button {
+      padding: 7px;
+      width: 150px;
+      margin: 5px auto;
+    }
+    .so{
+      margin-left: -90px !important;
+    }
+  }
+}
 
 .card {
   border: 2px solid #d1d2d38a;
@@ -831,6 +881,7 @@ button{
   .top {
     display: flex;
     gap: 100px;
+    flex-wrap: wrap;
 
     .leftTop {
       padding-right: 40px;
@@ -952,6 +1003,9 @@ button{
         margin-right: 20px;
 
       }
+      i{
+        display: none !important;
+      }
 
       div {
         margin-bottom: 15px;
@@ -984,6 +1038,195 @@ button{
   }
 }
 
+@media (max-width:600px) {
+  .profileContainer{
+    .top{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: -60px;
+      .leftTop {
+      
+       border:none !important;
+  
+        img {
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+        }
+      }
+      .rightTop {
+        margin-left:80px;
+        border:none !important;
+        margin-top: -70px;
+      
+  
+        
+        a {
+          text-decoration: none !important;
+        }
+  
+        .email {
+          font-size: 16px;
+          font-weight: 500;
+          color: black;
+  
+        }
+  
+        .name {
+          font-size: 15px;
+          font-weight: 500;
+          color: black;
+
+        }
+  
+        .study {
+          margin: 20px 0px 10px 0px;
+          display: flex;
+          gap: 40px;
+          align-items: center;
+        }
+  
+        div {
+          margin-bottom: 10px
+        }
+      }
+      
+    .rightMost {
+      margin-left:80px;
+      border:none !important;
+      margin-top: -80px;
+
+      .email {
+        font-size: 16px;
+        font-weight: 500;
+        color: black;
+
+      }
+
+      .individualDetails {
+        display: flex;
+        gap: 20px;
+
+        div {
+          margin-bottom: 10px;
+        }
+
+        label {
+          font-size: 13px;
+          font-weight: 600;
+          color: black;
+        }
+      }
+    }
+
+    }
+    .bottom {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap !important;
+  
+  
+      button,
+      select {
+        padding: 2px 7px;
+        margin-left: -10px;
+      }
+  
+      button {
+        margin-left: 5px;
+      }
+  
+      select {
+        width: 80px;
+      }
+  
+      .leftBottom {
+        position: relative;
+        flex: 50%;
+  
+        .update,
+        .danger {
+          background: blue;
+          border: none;
+          border-radius: 5px;
+          padding: 4px 7px;
+          outline: 0;
+          cursor: pointer;
+          color: white;
+        }
+  
+        .danger {
+          background: red;
+          margin-left: -10px;
+        }
+  
+        label {
+          font-size: 13px;
+          font-weight: 500;
+          color: black;
+          margin-right: 10px;
+         
+  
+        }
+        select{
+          width:80px;
+        }
+        input[type="number"]{
+          height:20px !important;
+         
+
+        }
+        button{
+          display: none !important;
+        }
+        .dD{
+          margin-bottom:20px;
+        }
+        i{
+          display: inline !important;
+          background: green;
+          color: white;
+          padding: 4px;
+          border-radius: 50%;
+          &.danger{
+            background: red !important;
+            color: white;
+            padding: 4px;
+            border-radius: 50% !important;
+            margin-left: 20px;
+           
+          }
+        }
+  
+        div {
+          margin-bottom: 15px;
+  
+          &:last-child {
+            margin-top: 10px !important;
+          }
+        }
+  
+      }
+  
+      .rightBottom {
+        // position: absolute;
+        // right: 50px;
+        margin-left: 0px !important;
+        textarea{
+          width:100%;
+        }
+        button{
+          width:100%;
+        }
+  
+        
+       
+      }
+    }
+
+  }
+}
 
 
 

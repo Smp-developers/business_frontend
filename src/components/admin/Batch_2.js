@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
 
-const Batch_2 = ({  }) => {
+const Batch_2 = ({ batch2,settrigger,trigger }) => {
     const [load, setLoad] = useState(false)
     const [search, setSearch] = useState("");
     const [columns, setColumns] = useState([]);
@@ -29,14 +29,7 @@ const Batch_2 = ({  }) => {
 
     const navigate = useNavigate()
 
-    const [batch2, setBatch2] = useState([])
-    useEffect(() => {
-        setLoad(true)
-      axios.get(`${Backend_url}/api/get_all_batch2/`).then((res) => {
-        setLoad(false)
-        setBatch2(res.data)
-      })
-    }, [])
+  
 
     const sendingMailToAll = (e) => {
         setLoad(true)
@@ -58,6 +51,7 @@ SMP Developers
 
                 setTimeout(() => {
                     setTrans('-100px')
+                    settrigger(!trigger)
                     // window.location.reload()
                     setLoad(false)
 
@@ -94,7 +88,9 @@ SMP Developers
             ).then(res=>{
                 setTimeout(() => {
                     setTrans('-100px')
-                    navigate(`viewProfile/${id}`)
+                    // navigate(`viewProfile/${id}`)
+                    settrigger(!trigger)
+                    setLoad(false)
                 }, 3000)
             })
       
@@ -118,6 +114,8 @@ SMP Developers
 
 
                 sendPaymentMail(email,id,payment,name)
+                e.target.previousElementSibling.value=''
+
             }).catch(err => {
                 setColor("red")
                 setTrans('0px')
@@ -126,7 +124,8 @@ SMP Developers
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                    settrigger(!trigger)
+                    setLoad(false)
 
                 }, 3000)
             })
@@ -165,7 +164,7 @@ SMP Developers
             <Alert msg={msg} trans={trans} color={color} />
             {load === true && <Loader />}
             <div>
-                <div className="topNavModi">
+                <div className="topNavModi visi">
                     <div>
                         <input
                             type="text"
@@ -208,18 +207,18 @@ SMP Developers
                                         overflowY: "scroll",
                                     }}
                                 >
-                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                    <Table sx={{ minWidth: 650 }} aria-label="simple table" className="sT">
                                         <TableHead style={{ position: "sticky", top: "0", background: "black" }}>
                                             <TableRow className="t">
                                                 {/* <TableCell className="tableCell head">Id</TableCell> */}
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>ID</TableCell>
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>Name</TableCell>
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>Role</TableCell>
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>Email</TableCell>
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>Payment paid</TableCell>
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>Update Payment</TableCell>
+                                                <TableCell className="tableCell head vP" style={{ color: "white" }}>ID</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Name</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Role</TableCell>
+                                                <TableCell className="tableCell head vP" style={{ color: "white" }}>Email</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Payment paid</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Update Payment</TableCell>
 
-                                                <TableCell className="tableCell head" style={{ color: "white" }}>View</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>View</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -228,23 +227,23 @@ SMP Developers
                                                     <TableRow key={index}>
                                                         {/* <TableCell className="tableCell bo">{row.index}</TableCell> */}
 
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo vP">
                                                             {row.id}
                                                         </TableCell>
 
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                             {row.first_name}
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo" style={{textTransform:"capitalize"}}>
+                                                        <TableCell className="tableCell bo visi" style={{textTransform:"capitalize"}}>
                                                             {row.role}
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
-                                                            {row.email}
+                                                        <TableCell className="tableCell bo vP">
+                                                        <Link to={`viewProfile/${row.id}`}> {row.email}</Link>
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                             {row.paid_amount}
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                         {row.role !=='trainer' && 
                                                             <><input type="number"  />
                                                             
@@ -255,7 +254,7 @@ SMP Developers
                                                             >Update</button></>}
                                                         </TableCell>
 
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                             <Link to={`viewProfile/${row.id}`}>View Profile</Link>
                                                         </TableCell>
                                                     </TableRow>

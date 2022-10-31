@@ -90,13 +90,17 @@ my number is ${number}
           <h1 className="c-title">Let's discuss about the course</h1>
           <div className="c-info">
             <div className="c-info-item">
-              {/* <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc_FMyxjAaI94R5vnM7BF0K5kdvz8JCv5iJV-DLtw&s'} alt="" className="c-icon" /> */}
-            
-            <a href="https://api.whatsapp.com/send?phone=9490722524" style={{fontSize:"18px"}}>Send Message to 9490722524</a>
+            <i className="fa-solid fa-phone"></i>            
+            <a href="https://api.whatsapp.com/send?phone=9490722524" style={{fontSize:"16px",marginLeft:"5px"}}>Contact</a>
             </div>
             <div className="c-info-item">
-              {/* <img className="c-icon" src={'https://cdn-icons-png.flaticon.com/512/761/761755.png'} alt="" /> */}
-              <a href="mailto:smpdevelopers.official@gmail.com" style={{fontSize:"18px"}}>smpdevelopers.official@gmail.com</a>
+            <i class="fa-sharp fa-solid fa-envelope"></i>
+            <a href="mailto:smpdevelopers.official@gmail.com" style={{fontSize:"16px",marginLeft:"5px"}}>Mail</a>
+            </div>
+           
+            <div className="c-info-item">
+            <i class="fa-brands fa-instagram"></i>
+            <a href="https://www.instagram.com/smp_developers/" style={{fontSize:"16px",marginLeft:"5px"}}>Instagram</a>
             </div>
            
           </div>

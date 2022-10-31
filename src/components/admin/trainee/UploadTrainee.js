@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Alert from '../../alert/Alert'
 import { Backend_url } from '../../../Config'
 import Loader from '../../loader/Loader'
-const UploadTrainee = ({ setContentVal }) => {
+const UploadTrainee = ({ setContentVal,settrigger,trigger }) => {
 
     const [image, setImage] = useState('')
     const [name, setName] = useState('')
@@ -49,8 +49,22 @@ SMP Developers
                 setDesignation('')
                 setBatch('')
                 setMobile('')
+                settrigger(!trigger)
+                setContentVal('trainee_list')
                 setLoad(false)
 
+
+
+
+            }, 3000)
+        }).catch(err=>{
+            setColor("red")
+            setTrans('0px')
+            setMsg('Error in sending mail')
+            setTimeout(() => {
+
+                setLoad(false)
+                setTrans('-100px')
 
 
             }, 3000)
@@ -93,7 +107,7 @@ SMP Developers
             {load === true && <Loader />}
             <div className='course'>
                 <div style={{ paddingLeft: "140px" }}>
-                    Add Trainee Image
+                   <span className='so'> Add Trainee Image</span>
                     <input type="file"  style={{ width: "300px" }} onChange={handleImage} />
                 </div>
                 <div>
@@ -103,7 +117,7 @@ SMP Developers
                     <input type="text" style={{ width: "300px" }} onChange={e => { setEmail(e.target.value) }} value={email} placeholder="Add trainee email" />
                 </div>
                 <div>
-                    <input type="text" style={{ width: "300px" }} onChange={e => { setCompany(e.target.value) }} value={company} placeholder="Add Company" />
+                    <input type="text" style={{ width: "300px" }} onChange={e => { setCompany(e.target.value) }} value={company} placeholder="Add Job" />
                 </div>
                 <div>
                     <input type="text" style={{ width: "300px" }} onChange={e => { setDesignation(e.target.value) }} value={designation} placeholder="Add Skills" />

@@ -84,7 +84,12 @@
     .a-left {
       width: 100%;
     }
-
+.a-title{
+  font-size: 20px;
+}
+.a-sub{
+  font-size: 16px;
+}
     .a-card {
       height: 30vh;
     }

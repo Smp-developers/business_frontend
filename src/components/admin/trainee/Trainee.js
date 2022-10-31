@@ -6,7 +6,7 @@ import Trainee_list from './Trainee_list'
 import UploadTrainee from './UploadTrainee'
 import Loader from '../../loader/Loader'
 
-const Trainee = () => {
+const Trainee = ({trainees,settrigger,trigger}) => {
   const [contentVal, setContentVal] = useState('trainee_list')
   useEffect(() => {
 
@@ -14,16 +14,7 @@ const Trainee = () => {
 
   const [load,setLoad] = useState(false)
 
-  const [trainees, setTrainees] = useState([])
-  useEffect(() => {
-    
-    setLoad(true)
-    axios.get(`${Backend_url}/api/get_all_trainees`).then((res) => {
-      setLoad(false)
-      setTrainees(res.data)
-      
-    })
-  }, [])
+  
 
   return (
     <div className='traineeContainer'>
@@ -41,7 +32,7 @@ const Trainee = () => {
         </div></div>
       <div className="contents">
         {contentVal === 'trainee_list' && <Trainee_list trainees={trainees} />}
-        {contentVal === 'add' && <UploadTrainee />}
+        {contentVal === 'add' && <UploadTrainee settrigger={settrigger} trigger={trigger} setContentVal={setContentVal}/>}
       </div>
     </div>
   )

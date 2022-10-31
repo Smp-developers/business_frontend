@@ -100,6 +100,10 @@
   .i {
     flex-direction: column;
   }
+  .i-intro{
+    font-size: 20px;
+    text-align: center;
+  }
 
   .i-left-wrapper {
   

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Alert from '../alert/Alert'
 import { Backend_url } from '../../Config'
 import Loader from '../loader/Loader'
-const Courses = () => {
+const Courses = ({settrigger,trigger}) => {
 
 
   const [image, setImage] = useState('')
@@ -36,7 +36,9 @@ const Courses = () => {
 
       setTimeout(() => {
         setTrans('-100px')
-        window.location.reload()
+        // window.location.reload()
+        setLoad(false)
+        settrigger(!trigger)
 
 
 
@@ -62,7 +64,7 @@ const Courses = () => {
       {load === true && <Loader />}
       <div className='course'>
         <div style={{ paddingLeft: "140px" }}>
-          Add Course Image
+         <span className='so'> Add Course Image</span>
           <input type="file" style={{ width: "300px" }} onChange={handleImage} />
         </div>
         <div>

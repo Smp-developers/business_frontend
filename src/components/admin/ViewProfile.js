@@ -5,6 +5,7 @@ import { Backend_url, Cloudinary_url } from '../../Config'
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
 import jwtDecode from 'jwt-decode'
+import { Link } from 'react-router-dom'
 const ViewProfile = () => {
     const { id } = useParams()
     const [user, setUser] = useState([])
@@ -17,6 +18,11 @@ const ViewProfile = () => {
     const [total, setTotal] = useState(10000)
     const [payment, setPayment] = useState(0)
     const [message, setMessage] = useState('')
+
+    const [trigger,setTrigger] = useState(false)
+
+
+    const [emailSent,setEmailSent] = useState(false)
 
     useEffect(() => {
         setLoad(true)
@@ -34,7 +40,7 @@ const ViewProfile = () => {
          
         }
     
-      }, [id])
+      }, [id,trigger])
 
 
 
@@ -86,7 +92,7 @@ SMP Developers
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                   setLoad(false)
 
                 }, 3000)
             })
@@ -112,7 +118,10 @@ SMP Developers
         ).then(res => {
             setTimeout(() => {
                 setTrans('-100px')
-                window.location.reload()
+                setTrigger(!trigger)
+                setLoad(false)
+                
+
             }, 3000)
         })
 
@@ -141,7 +150,7 @@ SMP Developers
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                   setLoad(false)
 
                 }, 3000)
             })
@@ -167,7 +176,11 @@ SMP Developers
         ).then(res => {
             setTimeout(() => {
                 setTrans('-100px')
-                window.location.reload()
+                //setLoad(false)
+                setTrigger(!trigger)
+                setLoad(false)
+                setEmailSent(false)
+
             }, 3000)
         })
 
@@ -194,7 +207,7 @@ SMP Developers
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                   setLoad(false)
 
                 }, 3000)
             })
@@ -220,7 +233,12 @@ SMP Developers
         ).then(res => {
             setTimeout(() => {
                 setTrans('-100px')
-                window.location.reload()
+                //setLoad(false)
+                setTrigger(!trigger)
+                setEmailSent(false)
+                setLoad(false)
+                
+
             }, 3000)
         })
 
@@ -246,7 +264,7 @@ SMP Developers
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                   setLoad(false)
 
                 }, 3000)
             })
@@ -273,14 +291,19 @@ SMP Developers`
         ).then(res => {
             setTimeout(() => {
                 setTrans('-100px')
-                window.location.reload()
+                //setLoad(false)
+                setEmailSent(false)
+                setTrigger(!trigger)
+                setLoad(false)
+
+
             }, 3000)
         })
 
     }
 
     const paymentUpdate = (e) => {
-        if (window.confirm(`Do you really want to Update ${user.email} payment to ${total}?`)) {
+        if (window.confirm(`Do you really want to Update ${user.email} payment to ${payment}?`)) {
             setLoad(true)
             axios.post(`${Backend_url}/api/update_single_payment/${user.id}`,
                 { "paid_amount": payment }
@@ -291,6 +314,7 @@ SMP Developers`
 
 
                 sendPaymentMail(user.email)
+                setPayment(0)
 
             }).catch(err => {
                 setColor("red")
@@ -300,7 +324,7 @@ SMP Developers`
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                   setLoad(false)
 
                 }, 3000)
             })
@@ -318,11 +342,14 @@ SMP Developers`
                 setTrans('0px')
                 setMsg(`Email sent Successfully.....`)
 
-
+               
                 setTimeout(() => {
                     setTrans('-100px')
 
-                    window.location.reload()
+                    //setLoad(false)
+                    setTrigger(!trigger)
+                    setEmailSent(true)
+                  
 
 
                 }, 3000)
@@ -335,7 +362,7 @@ SMP Developers`
 
 
                     setTrans('-100px')
-                    window.location.reload()
+                   setLoad(false)
 
                 }, 3000)
             })
@@ -348,7 +375,9 @@ SMP Developers`
             <Alert msg={msg} trans={trans} color={color} />
             {load === true && <Loader />}
             <div className='profileContainer'>
+            <Link to={`/frontend/admin`} style={{fontSize:"20px",cursor:"pointer"}}><i className="fa-solid fa-arrow-left"></i></Link>
                 <div className='top'>
+                
                     <div className="leftTop">
                         <img src={`${Cloudinary_url}/${user.image}`} width={150} height={150} alt="" />
                     </div>
@@ -406,11 +435,13 @@ SMP Developers`
                                     <option value={1}>1</option>
                                     <option value={2}>2</option>
                                 </select>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"45px"}} onClick={updateReferal}></i>
                                 <button className='update' onClick={updateReferal}>Update</button>
                             </div>
                             <div>
                                 <label>To Update <span style={{ color: "green" }}>Total</span> amount of the user: </label>
                                 <select onChange={e => setTotal(e.target.value)}>
+                                <option value={5000}>5000</option>
                                     <option value={7000}>7000</option>
                                     <option value={8000}>8000</option>
                                     <option value={9000}>9000</option>
@@ -418,19 +449,21 @@ SMP Developers`
                                     <option value={15000}>15000</option>
 
                                 </select>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"30px"}} onClick={totalUpdate}></i>
                                 <button className='update' onClick={totalUpdate}>Update</button>
                             </div>
                             <div>
                                 <label>To Update <span style={{ color: "green" }}>Payment</span> made by user: </label>
-                                <select onChange={e => setPayment(e.target.value)}>
-                                    <option value={0}>0</option>
+                                <input type="number" onChange={e => setPayment(e.target.value)} style={{width:"100px"}} value={payment}/>
+                                <i className="fa-solid fa-arrow-up " onClick={paymentUpdate}></i>
+                                    {/* <option value={0}>0</option>
                                     <option value={2500}>2500</option>
                                     <option value={5000}>5000</option>
                                     <option value={10000}>8000</option>
                                     <option value={15000}>9000</option>
 
 
-                                </select>
+                                </input> */}
                                 <button className='update' onClick={paymentUpdate}>Update</button>
                             </div>
                             <div>
@@ -443,16 +476,18 @@ SMP Developers`
 
 
                                 </select>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"73px"}}  onClick={changeBatch}></i>
                                 <button className='update' onClick={changeBatch}>Update</button>
                             </div>
-                            <div>
+                            <div className="dD">
                                 <label>To Delete  {user.email} permanantly:</label>
+                                <i class="fa-solid fa-trash danger" onClick={deleteUser} ></i>
                                 <button className='danger' onClick={deleteUser}>Delete </button>
                             </div>
                         </div>
                         <div className='rightBottom'>
                             <textarea rows={10} cols={50} value={message} onChange={e => { setMessage(e.target.value) }}></textarea>
-                            <button className='update' onClick={sendMail} style={{ display: "block" }}>Send mail</button>
+                            {!emailSent ? <button className='update' onClick={sendMail} style={{ display: "block" }}>Send mail</button> : <button className='update buttonSuc'  style={{ display: "block",background:"green",cursor:"not-allowed" }}>Mail sent</button> }
                         </div>
                     </div>
                     :

@@ -7,7 +7,7 @@ import Loader from "../loader/Loader";
 
 
 
-const CoursesList = ({  }) => {
+const CoursesList = ({ courses,settrigger,trigger }) => {
 
   const [load,setLoad] = useState(false)
   const [msg, setMsg] = useState('')
@@ -18,15 +18,7 @@ const CoursesList = ({  }) => {
 
 
 
-  const [courses, setCourses] = useState([])
-  useEffect(() => {
-    setLoad(true)
-    axios.get(`${Backend_url}/api/get_all_courses/`).then((res) => {
-      setLoad(false)
-      setCourses(res.data)
-      
-    })
-  }, [])
+  
 
   const delete_course=(id,name)=>{
 if(window.confirm(`Do you Want delete ${name}`)){
@@ -40,7 +32,8 @@ if(window.confirm(`Do you Want delete ${name}`)){
     setTimeout(() => {
         setTrans('-100px')
         setLoad(false)
-        window.location.reload()
+        // window.location.reload()
+        settrigger(!trigger)
 
 
 

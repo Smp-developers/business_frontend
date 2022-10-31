@@ -25,7 +25,7 @@ const TrainersStudent = ({ trainees }) => {
     return (
         <>
            
-            {trainees.length > 0 ? <div style={{ padding: "20px", height: "350px", overflowY: "scroll", display: "flex", gap: "30px", flexWrap: "wrap" }}>
+            {trainees.length > 0 ? <div style={{ padding: "20px", display: "flex", gap: "30px", flexWrap: "wrap" }}>
                 {
                     trainees.map((c, index) => (
                         <div className='card' key={index}>
@@ -39,7 +39,7 @@ const TrainersStudent = ({ trainees }) => {
                                 {c.batch}
                             </div>
                             <div>
-                                <span style={{ marginRight: "5px" }}>Company:</span>
+                                <span style={{ marginRight: "5px" }}>Job:</span>
                                 {c.company.slice(0)}
                             </div>
                             <div>

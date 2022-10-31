@@ -50,7 +50,8 @@ const UpdateCourse = () => {
                 setTimeout(() => {
                     setTrans('-100px')
 
-                    navigate('/admin')
+                    navigate('/frontend/admin')
+
 
 
                 }, 3000)
@@ -85,7 +86,7 @@ const UpdateCourse = () => {
 
                     <div className='course'>
                         <div style={{ paddingLeft: "140px" }}>
-                            Update Course Image
+                            <span className='so'> Update Image</span>
                             <input type="file" style={{ width: "300px" }} onChange={e => {
                                 setImage(e.target.files[0])
                             }}

@@ -14,32 +14,26 @@ import Paper from "@mui/material/Paper";
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
 
-const Batch_1 = ({  }) => {
+const Batch_1 = ({ batch1,settrigger,trigger}) => {
     const [search, setSearch] = useState("");
     const [columns, setColumns] = useState([]);
     const [searchC, setSearchC] = useState([]);
     const [meetingUrl, setMeetingUrl] = useState('')
-    
+
     const [msg, setMsg] = useState('')
     const [trans, setTrans] = useState('')
     const [color, setColor] = useState('')
-    const [load,setLoad] = useState(false)
+    const [load, setLoad] = useState(false)
 
-
-const navigate = useNavigate()
-    const [batch1, setBatch1] = useState([])
-    useEffect(() => {
-        setLoad(true)
-      axios.get(`${Backend_url}/api/get_all_batch1/`).then((res) => {
-        setLoad(false)
-        setBatch1(res.data)
-      })
-    }, [])
+    
+    const navigate = useNavigate()
+   
 
     const sendingMailToAll = (e) => {
         setLoad(true)
-        axios.post(`${Backend_url}/api/group_batch1_mail`, { "message": 
-`Hi Batch 1 ,
+        axios.post(`${Backend_url}/api/group_batch1_mail`, {
+            "message":
+                `Hi Batch 1 ,
 
 Your meeting update today ${meetingUrl}.  please visit our website or contact administration for any query.
 
@@ -47,7 +41,8 @@ Thank you
 with Regards,
 Administration Team,
 SMP Developers
-` ,"meeting":meetingUrl})
+` , "meeting": meetingUrl
+        })
             .then(res => {
                 setColor("green")
                 setTrans('0px')
@@ -77,10 +72,11 @@ SMP Developers
 
 
 
-    const sendPaymentMail = (email,id,payment,name) =>{
+    const sendPaymentMail = (email, id, payment, name) => {
         axios.post(`${Backend_url}/api/sending_individual_mail`,
-                {"subject":"Your Payment Update", "message": 
-`
+            {
+                "subject": "Your Payment Update", "message":
+                    `
 Hi ${name},
 
 Your payment has been updated to ${payment}. To check your payment details, please visit our website or contact administration.
@@ -90,45 +86,49 @@ with Regards,
 Administration Team,
 SMP Developers
 
-`,"email":email }
-            ).then(res=>{
-                setTimeout(() => {
-                    setTrans('-100px')
-                    
-                   navigate(`viewProfile/${id}`)
-                }, 3000)
-            })
-      
+`, "email": email
+            }
+        ).then(res => {
+            setTimeout(() => {
+                setTrans('-100px')
+
+                // navigate(`viewProfile/${id}`)
+                settrigger(!trigger)
+                setLoad(false)
+            }, 3000)
+        })
+
     }
 
-    const paymentUpdate = async (e,id, email,name) => {
-        let payment=e.target.previousElementSibling.value
-        if(payment===''){
-            payment=0
+    const paymentUpdate = async (e, id, email, name) => {
+        let payment = e.target.previousElementSibling.value
+        if (payment === '') {
+            payment = 0
         }
 
         if (window.confirm(`Do you want to update payment status of ${email} to ${payment}`)) {
             setLoad(true)
-           await axios.post(`${Backend_url}/api/update_single_payment/${id}`,
+            await axios.post(`${Backend_url}/api/update_single_payment/${id}`,
                 { "paid_amount": payment }
             ).then(res => {
                 setColor("green")
                 setTrans('0px')
                 setMsg(`payment for ${email} is updated to ${payment} Successfully.....`)
-                sendPaymentMail(email,id,payment,name)
+                sendPaymentMail(email, id, payment, name)
+                e.target.previousElementSibling.value=''
 
-                
-            }).catch(err=>{
+
+            }).catch(err => {
                 setColor("red")
                 setTrans('0px')
                 setMsg('Error in payment Updation please reload page')
-                setTimeout(()=>{
-                    
-                    
+                setTimeout(() => {
+
+
                     setTrans('-100px')
                     setLoad(false)
-        
-                   },3000)
+
+                }, 3000)
             })
         }
 
@@ -141,16 +141,16 @@ SMP Developers
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
-        setSearchC(batch1.filter(c => c.email.toLowerCase().includes(e.target.value.toLowerCase()) || c.id.toString().includes(e.target.value) || c.role.toLowerCase().includes(e.target.value.toLowerCase())) )
+        setSearchC(batch1.filter(c => c.email.toLowerCase().includes(e.target.value.toLowerCase()) || c.id.toString().includes(e.target.value) || c.role.toLowerCase().includes(e.target.value.toLowerCase())))
     };
 
-   
+
     return (
         <>
             <Alert msg={msg} trans={trans} color={color} />
-            {load===true && <Loader />}
+            {load === true && <Loader />}
             <div>
-                <div className="topNavModi">
+                <div className="topNavModi visi">
                     <div>
                         <input
                             type="text"
@@ -160,6 +160,7 @@ SMP Developers
                             }}
                             placeholder="update meeting url"
                             style={{ padding: "5px", width: "300px" }}
+                            
                         />
                     </div>
 
@@ -182,29 +183,29 @@ SMP Developers
                             placeholder="search Batch_1 Students By their ID, EMAIL, Role"
                         />
                         {/* <i class="fa-solid fa-magnifying-glass" onClick={findSearch} style={{padding:"5px",paddingBottom:"8px"}}></i> */}
-                        {searchC.length>0 ? <div className="bottomOverView">
+                        {searchC.length > 0 ? <div className="bottomOverView">
                             <div className="tables">
                                 <TableContainer
                                     component={Paper}
                                     className="table "
                                     style={{
-                                       height:"350px",
+                                        height: "350px",
                                         overflowY: "scroll",
                                     }}
                                 >
-                                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                        <TableHead style={{position:"sticky",top:"0",background:"black"}}>
+                                    <Table sx={{ minWidth: 650 }} aria-label="simple table" className="sT">
+                                        <TableHead style={{ position: "sticky", top: "0", background: "black" }}>
                                             <TableRow className="t">
                                                 {/* <TableCell className="tableCell head">Id</TableCell> */}
-                                                <TableCell className="tableCell head" style={{color:"white"}} >ID</TableCell>
-                                                <TableCell className="tableCell head" style={{color:"white"}}>Name</TableCell>
-                                                <TableCell className="tableCell head" style={{color:"white"}}>Role</TableCell>
-                                                <TableCell className="tableCell head" style={{color:"white"}}>Email</TableCell>
-                                                <TableCell className="tableCell head" style={{color:"white"}}>Payment paid</TableCell>
-                                                
-                                                <TableCell className="tableCell head" style={{color:"white"}}>Update Payment</TableCell>
+                                                <TableCell className="tableCell head vP" style={{ color: "white" }} >ID</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Name</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Role</TableCell>
+                                                <TableCell className="tableCell head vP" style={{ color: "white" }}>Email</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Payment paid</TableCell>
 
-                                                <TableCell className="tableCell head" style={{color:"white"}}>View</TableCell>
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>Update Payment</TableCell>
+
+                                                <TableCell className="tableCell head visi" style={{ color: "white" }}>View</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -217,31 +218,31 @@ SMP Developers
                                                             {row.id}
                                                         </TableCell>
 
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                             {row.first_name}
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                             {row.role}
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
-                                                            {row.email}
+                                                        <TableCell className="tableCell bo ">
+                                                        <Link to={`viewProfile/${row.id}`}>  {row.email} </Link>
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
+                                                        <TableCell className="tableCell bo visi">
                                                             {row.paid_amount}
                                                         </TableCell>
-                                                        <TableCell className="tableCell bo">
-                                                            {row.role !=='trainer' && 
-                                                            <><input type="number"  />
-                                                            
-                                                            <button className="" style={{ border: "none", outline: "0", background: "blue", padding: "2px 4px", cursor: "pointer", marginLeft: "5px", color: "white" ,borderRadius: "5px"}}
-                                                                onClick={e => {
-                                                                    paymentUpdate(e,row.id, row.email,row.first_name)
-                                                                }}
-                                                            >Update</button></>}
+                                                        <TableCell className="tableCell bo visi">
+                                                            {row.role !== 'trainer' &&
+                                                                <><input type="number" />
+
+                                                                    <button className="" style={{ border: "none", outline: "0", background: "blue", padding: "2px 4px", cursor: "pointer", marginLeft: "5px", color: "white", borderRadius: "5px" }}
+                                                                        onClick={e => {
+                                                                            paymentUpdate(e, row.id, row.email, row.first_name)
+                                                                        }}
+                                                                    >Update</button></>}
                                                         </TableCell>
 
-                                                        <TableCell className="tableCell bo">
-                                                            <Link  to={`viewProfile/${row.id}`}>View Profile</Link>
+                                                        <TableCell className="tableCell bo visi">
+                                                            <Link to={`viewProfile/${row.id}`}>View Profile</Link>
                                                         </TableCell>
                                                     </TableRow>
                                                 </>
@@ -251,12 +252,12 @@ SMP Developers
                                 </TableContainer>
                             </div>
                         </div>
-                        
-                        :
-                        <div className="bottomOverView" style={{display:"flex",justifyContent:"center",alignItems:"center",height:"300px"}}>
-                            <h1>No Students in Batch_1</h1>
-                        </div>
-                        
+
+                            :
+                            <div className="bottomOverView" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "300px" }}>
+                                <h1>No Students in Batch_1</h1>
+                            </div>
+
                         }
 
                     </div>
