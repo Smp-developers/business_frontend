@@ -49,11 +49,13 @@
         label{
             display: block;
             padding: 5px 0px;
-            
-            &::after{
-                content: '*';
-                color: red;
+            &.imp{
+                &::after{
+                    content: '*';
+                    color: red;
+                }
             }
+            
             
         }
         input{

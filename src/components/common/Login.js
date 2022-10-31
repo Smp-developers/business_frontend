@@ -155,7 +155,7 @@ SMP Developers
         <div className='bottomBox'>
 
           <div className='emailContainer'>
-            <label>Email</label>
+            <label className='imp'>Email</label>
             <input type="text" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required autoComplete='off' />
             {/* {send === '' && email !== '' && <div className='emailVerify' onClick={e => { sendOtp(e) }}>
               send otp
@@ -172,7 +172,7 @@ SMP Developers
             </div>} */}
           </div>
           <br />
-          <label>Password</label>
+          <label className='imp'>Password</label>
           {visible ?
             <div style={{ position: "relative" }} >
               <input type="password" value={password} id="passI" autoComplete="new-password"

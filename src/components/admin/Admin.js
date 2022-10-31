@@ -134,7 +134,7 @@ const Admin = () => {
           <div className="midone" >
             <div className="dataset">{user.first_name}</div>
             <div className="em">{user.email}</div>
-          </div><div><i className="fa-solid fa-arrow-down invisi" style={{ background: "green", color: "white", padding: "5px", borderRadius: "50%" ,marginLeft:"30px"}} onClick={e => { settrigger(!trigger) }}></i></div>
+          </div><div><i className="fa-solid fa-arrow-down invisi" style={{ background: "green", color: "white", padding: "5px", borderRadius: "50%" ,marginLeft:"10px"}} onClick={e => { settrigger(!trigger) }}></i></div>
 
 
         </div>

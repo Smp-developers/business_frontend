@@ -375,7 +375,7 @@ SMP Developers`
             <Alert msg={msg} trans={trans} color={color} />
             {load === true && <Loader />}
             <div className='profileContainer'>
-            <Link to={`/frontend/admin`} style={{fontSize:"20px",cursor:"pointer"}}><i className="fa-solid fa-arrow-left"></i></Link>
+            <Link to={`/frontend/admin`} style={{fontSize:"20px",cursor:"pointer"}} className="visi"><i className="fa-solid fa-arrow-left"></i></Link>
                 <div className='top'>
                 
                     <div className="leftTop">
@@ -435,7 +435,7 @@ SMP Developers`
                                     <option value={1}>1</option>
                                     <option value={2}>2</option>
                                 </select>
-                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"45px"}} onClick={updateReferal}></i>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"10px"}} onClick={updateReferal}></i>
                                 <button className='update' onClick={updateReferal}>Update</button>
                             </div>
                             <div>
@@ -449,7 +449,7 @@ SMP Developers`
                                     <option value={15000}>15000</option>
 
                                 </select>
-                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"30px"}} onClick={totalUpdate}></i>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"10px"}} onClick={totalUpdate}></i>
                                 <button className='update' onClick={totalUpdate}>Update</button>
                             </div>
                             <div>
@@ -476,7 +476,7 @@ SMP Developers`
 
 
                                 </select>
-                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"73px"}}  onClick={changeBatch}></i>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"10px"}}  onClick={changeBatch}></i>
                                 <button className='update' onClick={changeBatch}>Update</button>
                             </div>
                             <div className="dD">

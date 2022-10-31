@@ -79,7 +79,7 @@ const UpdateCourse = () => {
             <Alert msg={msg} trans={trans} color={color} />
             {load === true && <Loader />}
             <div className='updateHolder'>
-            <Link to={`/frontend/admin`} style={{fontSize:"20px",cursor:"pointer"}}><i className="fa-solid fa-arrow-left"></i></Link>
+            <Link to={`/frontend/admin`} style={{fontSize:"20px",cursor:"pointer"}} className="visi"><i className="fa-solid fa-arrow-left"></i></Link>
 
                 <div className='left'>
                     <img src={`${Cloudinary_url}/${course.image}`} width={450} height={450} alt="" />

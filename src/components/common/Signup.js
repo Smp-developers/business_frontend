@@ -177,7 +177,7 @@ SMP Developers
           {next === false &&
             <>
               <div className='emailContainer'>
-                <label>Email</label>
+                <label className='imp'>Email</label>
                 <input type="email" value={email} id="email" onChange={e => setEmail(e.target.value)} autocomplete="off" placeholder="Email" required />
                 {send === '' && (email.includes('@gmail.com') || email.includes('@outlook.com')) && <div className='emailVerify' onClick={e => { sendOtp(e) }}>
                   send otp
@@ -195,7 +195,7 @@ SMP Developers
               </div>
               <br />
 
-              <label>Password</label>
+              <label className='imp'>Password</label>
               {visible ?
                 <div style={{ position: "relative" }} >
                   <input type="password" value={password} id="passI"
@@ -226,7 +226,7 @@ SMP Developers
 
 
               <div className='otp'>
-                <label>OTP</label>
+                <label className='imp'>OTP</label>
                 <input type="text" value={otp} onChange={e =>  verifyOtp(e)} autocomplete="off" placeholder="Enter otp to signup" required />
                 {/* {otpVerify === '' && otp !== '' &&
                   <div className='verify' onClick={e => { verifyOtp(e) }}>
@@ -251,10 +251,11 @@ SMP Developers
                     </div></>
                 }
               </div>
-              <label>Name</label>
+              <label className='imp'>Name</label>
               <input type="text" value={name} onChange={e => setName(e.target.value)} autocomplete="off" placeholder="Name" required />
-              <label>Graduation Year</label>
-              <input type="year" value={graduation} onChange={e => setGraduation(e.target.value)} autocomplete="off" placeholder="year" required />
+              <label className='imp'>Mobile</label>
+              <input type="text" value={mobile} onChange={e => setMobile(e.target.value)} autocomplete="off" placeholder="mobile" required />
+             
 
               <button onClick={handleNext} style={{ float: "right" }}><i className="fa-solid fa-arrow-right"></i><span>Next</span></button>
             </>
@@ -262,20 +263,20 @@ SMP Developers
 
           {next === true &&
             <>
-              <label>Experience</label>
+              <label>Experience (optional)</label>
               <input type="number" value={experience} onChange={e => setExperience(e.target.value)} autocomplete="off" placeholder="Experience" required />
-              <label>Mobile</label>
-              <input type="text" value={mobile} onChange={e => setMobile(e.target.value)} autocomplete="off" placeholder="mobile" required />
-              <label>college</label>
+              <label>Graduation Year (optional)</label>
+              <input type="year" value={graduation} onChange={e => setGraduation(e.target.value)} autocomplete="off" placeholder="year" required />
+              <label className='imp'>college</label>
               <input type="text" value={college} onChange={e => setCollege(e.target.value)} autocomplete="off" placeholder="college" required />
               <label>Social Media (optional)</label>
               <input type="text" value={social_media} onChange={e => setSocialMedia(e.target.value)} autocomplete="off" placeholder="Social links like instagram, linkedin,github" required />
-              <label>Profile Pic</label>
+              <label className='imp'>Profile Pic</label>
               <input type="file"   onChange={e => setImage(e.target.files[0])} required/>
 
               <button onClick={handleNext} ><i className="fa-solid fa-arrow-left"></i><span>Back</span></button>
 
-              {(email !== '' && password !== '' && image !== "" && graduation !== '' && mobile !== '' && college !== '' && otpVerify === 'success')
+              {(email !== '' && password !== '' && image !== "" &&  mobile !== '' && college !== '' && otpVerify === 'success' &&name !=='')
                 &&
                 (<button onClick={
                   handleSubmit
@@ -283,7 +284,7 @@ SMP Developers
 
               }
               {
-                (email === '' || password === '' || image === "" || graduation === '' || mobile === '' || college === '' ||  otpVerify !== 'success' )
+                (email === '' || password === '' || image === "" ||  mobile === '' || college === '' ||  otpVerify !== 'success'|| name ==='' )
                 &&
                 <button className='disable' style={{ float: "right" }}><i className="fa-solid fa-right-to-bracket"></i><span>Signup</span></button>
               }

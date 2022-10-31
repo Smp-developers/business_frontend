@@ -1048,7 +1048,7 @@ button{
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-top: -60px;
+      margin-top: 10px !important;
       .leftTop {
       
        border:none !important;
@@ -1192,13 +1192,14 @@ button{
           background: green;
           color: white;
           padding: 4px;
+          font-size: 12px;
           border-radius: 50%;
           &.danger{
             background: red !important;
             color: white;
             padding: 4px;
             border-radius: 50% !important;
-            margin-left: 20px;
+            margin-left: 10px;
            
           }
         }
