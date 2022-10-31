@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
 
-const OverAll = ({ newStudents,settrigger,trigger}) => {
+const OverAll = ({ newStudents, settrigger, trigger }) => {
     const [search, setSearch] = useState("");
     const [columns, setColumns] = useState([]);
     const [searchC, setSearchC] = useState([]);
@@ -27,7 +27,7 @@ const OverAll = ({ newStudents,settrigger,trigger}) => {
     const [load, setLoad] = useState(false)
 
 
-    
+
 
 
 
@@ -92,7 +92,7 @@ SMP Developers
         ).then(res => {
             setTimeout(() => {
                 setTrans('-100px')
-                
+
                 settrigger(!trigger)
                 setLoad(false)
             }, 3000)
@@ -115,7 +115,7 @@ SMP Developers
 
 
                 sendPaymentMail(email, payment, name)
-                e.target.previousElementSibling.value=''
+                e.target.previousElementSibling.value = ''
             }).catch(err => {
                 setColor("red")
                 setTrans('0px')
@@ -231,22 +231,36 @@ SMP Developers
                             }}
                             placeholder="update meeting url"
                             style={{ padding: "5px", width: "300px" }}
-                        
+
                         />
                     </div>
 
-                    <button onClick={
+                  {meetingUrl !=='' &&   <button onClick={
                         sendingMailToAll
                     }
                         className="sendAll"
 
 
-                    >Send Mail To All</button>
+                    >Send Mail To All</button>}
 
 
                 </div>
                 <div className="profileAll">
                     <div className="tableContainer ">
+                        <div className="invisi">
+                            <input
+                                type="text"
+                                value={meetingUrl}
+                                onChange={e => {
+                                    setMeetingUrl(e.target.value)
+                                }}
+                                placeholder="update meeting url"
+                                style={{ padding: "5px", width: "250px" }}
+
+                            />
+                            {meetingUrl !=='' && <i className="fa-solid fa-arrow-up " style={{marginLeft:"10", background:"green",padding:"5px",borderRadius:"50%",color:"white" }}  onClick={sendingMailToAll}></i>} 
+                        </div>
+                       
                         <input
                             type="text"
                             value={search}
@@ -293,7 +307,7 @@ SMP Developers
                                                                 {row.first_name}
                                                             </TableCell>
                                                             <TableCell className="tableCell bo vP">
-                                                            <Link to={`viewProfile/${row.id}`}>{row.email}</Link>
+                                                                <Link to={`viewProfile/${row.id}`}>{row.email}</Link>
                                                             </TableCell>
                                                             <TableCell className="tableCell bo visi">
                                                                 {row.paid_amount}

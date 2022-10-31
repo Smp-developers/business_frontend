@@ -151,7 +151,7 @@ SMP Developers
             {load === true && <Loader />}
             <div>
                 <div className="topNavModi visi">
-                    <div>
+                    <div >
                         <input
                             type="text"
                             value={meetingUrl}
@@ -164,18 +164,31 @@ SMP Developers
                         />
                     </div>
 
-                    <button onClick={
+                    {meetingUrl !=='' &&   <button onClick={
                         sendingMailToAll
                     }
                         className="sendAll"
 
 
-                    >Send Mail To All</button>
+                    >Send Mail To All</button>}
 
 
                 </div>
                 <div className="profileAll">
                     <div className="tableContainer">
+                    <div  className="invisi">
+                            <input
+                                type="text"
+                                value={meetingUrl}
+                                onChange={e => {
+                                    setMeetingUrl(e.target.value)
+                                }}
+                                placeholder="update meeting url"
+                                style={{ padding: "5px", width: "250px" }}
+
+                            />
+                             {meetingUrl !=="" && <i className="fa-solid fa-arrow-up " style={{marginLeft:"10", background:"green",padding:"5px",borderRadius:"50%",color:"white" }}  onClick={sendingMailToAll}></i>}
+                        </div>
                         <input
                             type="text"
                             value={search}

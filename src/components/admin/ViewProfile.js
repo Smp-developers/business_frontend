@@ -503,10 +503,12 @@ SMP Developers`
 
 
                                 </select>
+                                <i className="fa-solid fa-arrow-up " style={{marginLeft:"10"}}  onClick={changeBatch}></i>
                                 <button className='update' onClick={changeBatch}>Update</button>
                             </div>
-                            <div>
+                            <div className="dD">
                                 <label>To Delete  {user.email} permanantly:</label>
+                                <i class="fa-solid fa-trash danger" onClick={deleteUser} ></i>
                                 <button className='danger' onClick={deleteUser}>Delete </button>
                             </div>
                         </div>

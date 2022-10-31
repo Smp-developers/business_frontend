@@ -777,6 +777,9 @@ button{
       margin-left: -90px !important;
     }
   }
+  .topNavModi{
+
+  }
 }
 
 .card {
@@ -1283,10 +1286,15 @@ button{
 
 }
 
-
+.invisi {
+  display: none !important;
+}
 
 // media query
 @media (max-width:600px) {
+  .invisi {
+    display: block !important;
+  }
 body{
   overflow-y: scroll !important;
 }
