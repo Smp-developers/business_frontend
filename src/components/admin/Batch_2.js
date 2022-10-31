@@ -53,6 +53,7 @@ SMP Developers
                     setTrans('-100px')
                     settrigger(!trigger)
                     // window.location.reload()
+                    setMeetingUrl('')
                     setLoad(false)
 
 

@@ -51,6 +51,7 @@ SMP Developers
 
                 setTimeout(() => {
                     setTrans('-100px')
+                    setMeetingUrl('')
                     setLoad(false)
 
 
