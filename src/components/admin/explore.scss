@@ -14,6 +14,7 @@ button{
   width: 100%;
   padding: 10px 15px;
   display: flex;
+  justify-content:space-between ;
   
 
   .icons {
@@ -52,8 +53,8 @@ button{
    
     display: flex;
     gap: 13px;
-    position: absolute;
-    right: 20px;
+    // position: absolute;
+    // right: 20px;
     
 
     .button {

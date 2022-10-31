@@ -19,14 +19,14 @@ const Admin = () => {
   const [navVal, setNavVal] = useState('')
   const [user, setUser] = useState([])
   const [load, setLoad] = useState(false)
-  
-  const [trigger,settrigger] = useState(false)
+
+  const [trigger, settrigger] = useState(false)
   useEffect(() => {
     if (localStorage.getItem('nav')) {
       setNavVal(localStorage.getItem('nav'))
     }
     else {
-      localStorage.setItem('nav','newStudents')
+      localStorage.setItem('nav', 'newStudents')
       setNavVal('newStudents')
     }
   }, [trigger])
@@ -47,7 +47,7 @@ const Admin = () => {
 
       )
         .then(res => {
-         
+
           setUser(res.data)
         })
 
@@ -62,61 +62,61 @@ const Admin = () => {
 
   const [newStudents, setNewStudents] = useState([])
   useEffect(() => {
-      setLoad(true)
-      axios.get(`${Backend_url}/api/get_none_batches/`).then((res) => {
-          
-          setNewStudents(res.data)
-        
-            
-         
-      })
+    setLoad(true)
+    axios.get(`${Backend_url}/api/get_none_batches/`).then((res) => {
+
+      setNewStudents(res.data)
+
+
+
+    })
   }, [trigger])
 
 
   const [batch1, setBatch1] = useState([])
   useEffect(() => {
-      setLoad(true)
-      axios.get(`${Backend_url}/api/get_all_batch1/`).then((res) => {
-          
-          setBatch1(res.data)
-          
-      })
+    setLoad(true)
+    axios.get(`${Backend_url}/api/get_all_batch1/`).then((res) => {
+
+      setBatch1(res.data)
+
+    })
   }, [trigger])
 
 
   const [batch2, setBatch2] = useState([])
-    useEffect(() => {
-        setLoad(true)
-      axios.get(`${Backend_url}/api/get_all_batch2/`).then((res) => {
-       
-        setBatch2(res.data)
-       
-      })
-    }, [trigger])
+  useEffect(() => {
+    setLoad(true)
+    axios.get(`${Backend_url}/api/get_all_batch2/`).then((res) => {
+
+      setBatch2(res.data)
+
+    })
+  }, [trigger])
 
 
-    const [courses, setCourses] = useState([])
+  const [courses, setCourses] = useState([])
   useEffect(() => {
     setLoad(true)
     console.log("triggered")
     axios.get(`${Backend_url}/api/get_all_courses/`).then((res) => {
-      
+
       setCourses(res.data)
-      
+
     })
   }, [trigger])
 
 
   const [trainees, setTrainees] = useState([])
   useEffect(() => {
-    
+
     setLoad(true)
     axios.get(`${Backend_url}/api/get_all_trainees`).then((res) => {
-      
+
       setTrainees(res.data)
-      setTimeout(()=>{
+      setTimeout(() => {
         setLoad(false)
-      },2000)
+      }, 2000)
     })
   }, [trigger])
 
@@ -125,22 +125,26 @@ const Admin = () => {
 
       {load === true && <Loader />}
       <div className="topNavbar">
-        <div className="icons">
-          <i className="fa-solid fa-book-open"></i>
-        </div>
-
-
-        <div className="midone" >
-          <div className="dataset">{user.first_name}</div>
-          <div className="em">{user.email}</div>
-        </div>
-
-        <div className="endside" style={{display:"flex",alignItems:"center"}}>
-        <div className="visi" style={{background:"green",color:"white",fontWeight:"600",padding:"5px",borderRadius:"5px"}}>
-            <span style={{cursor:"pointer"}} onClick={e=>{settrigger(!trigger)}}>Update</span>
+        <div style={{ display: "flex",alignItems:"center" }}>
+          <div className="icons">
+            <i className="fa-solid fa-book-open"></i>
           </div>
-          <div className="dotsIcon">
-         
+
+
+          <div className="midone" >
+            <div className="dataset">{user.first_name}</div>
+            <div className="em">{user.email}</div>
+          </div><div><i className="fa-solid fa-arrow-down invisi" style={{ background: "green", color: "white", padding: "5px", borderRadius: "50%" ,marginLeft:"30px"}} onClick={e => { settrigger(!trigger) }}></i></div>
+
+
+        </div>
+        <div className="endside" style={{ display: "flex", alignItems: "center" }}>
+          <div className="visi" style={{ background: "green", color: "white", fontWeight: "600", padding: "5px", borderRadius: "5px" }}>
+            <span style={{ cursor: "pointer" }} className="" onClick={e => { settrigger(!trigger) }}>Update</span>
+
+          </div>
+          <div className="dotsIcon visi">
+
 
             <div
               style={{
@@ -150,7 +154,7 @@ const Admin = () => {
                 cursor: "pointer",
                 position: "relative",
               }}
-              className="add visi"
+              className="add "
 
 
             >
@@ -161,6 +165,8 @@ const Admin = () => {
 
             </div>
           </div>
+
+
         </div>
       </div>
 
@@ -168,43 +174,43 @@ const Admin = () => {
         <div className="bottomNav">
           <ul>
             <li onClick={e => {
-              localStorage.setItem('nav','newStudents')
+              localStorage.setItem('nav', 'newStudents')
               setNavVal('newStudents')
             }} className={navVal === 'newStudents' ? 'borderPresent' : ''}>NewStudents</li>
             <li
               onClick={e => {
-                localStorage.setItem('nav','batch1')
+                localStorage.setItem('nav', 'batch1')
                 setNavVal('batch1')
               }} className={navVal === 'batch1' ? 'borderPresent' : ''}>Batch 1</li>
             <li
               onClick={e => {
-                localStorage.setItem('nav','batch2')
+                localStorage.setItem('nav', 'batch2')
                 setNavVal('batch2')
               }} className={navVal === 'batch2' ? 'borderPresent' : ''}>Batch 2</li>
             <li
               onClick={e => {
-                localStorage.setItem('nav','courses')
+                localStorage.setItem('nav', 'courses')
                 setNavVal('courseUpload')
               }} className={navVal === 'courseUpload' ? 'borderPresent' : ''}>Course Upload</li>
             <li
               onClick={e => {
-                localStorage.setItem('nav','courses')
+                localStorage.setItem('nav', 'courses')
                 setNavVal('courses')
               }} className={navVal === 'courses' ? 'borderPresent' : ''}>Courses List</li>
             <li
               onClick={e => {
-                localStorage.setItem('nav','trainee')
+                localStorage.setItem('nav', 'trainee')
                 setNavVal('trainee')
               }} className={navVal === 'trainee' ? 'borderPresent' : ''}>Trainees</li>
           </ul>
         </div>
         <div className="decider">
-          {navVal === 'newStudents' && <NewStudents newStudents={newStudents} settrigger={settrigger} trigger={trigger}/>}
-          {navVal === 'batch1' && <Batch_1 batch1={batch1} settrigger={settrigger} trigger={trigger}/>}
-          {navVal === 'batch2' && <Batch_2  batch2={batch2} settrigger={settrigger} trigger={trigger}/>}
-          {navVal === 'courseUpload' && <Courses settrigger={settrigger} trigger={trigger}/>}
-          {navVal === 'courses' && <CoursesList courses={courses} settrigger={settrigger} trigger={trigger}/>}
-          {navVal === 'trainee' && <Trainee trainees={trainees} settrigger={settrigger} trigger={trigger}/>}
+          {navVal === 'newStudents' && <NewStudents newStudents={newStudents} settrigger={settrigger} trigger={trigger} />}
+          {navVal === 'batch1' && <Batch_1 batch1={batch1} settrigger={settrigger} trigger={trigger} />}
+          {navVal === 'batch2' && <Batch_2 batch2={batch2} settrigger={settrigger} trigger={trigger} />}
+          {navVal === 'courseUpload' && <Courses settrigger={settrigger} trigger={trigger} />}
+          {navVal === 'courses' && <CoursesList courses={courses} settrigger={settrigger} trigger={trigger} />}
+          {navVal === 'trainee' && <Trainee trainees={trainees} settrigger={settrigger} trigger={trigger} />}
         </div>
       </div>
     </div>
