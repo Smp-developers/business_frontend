@@ -157,7 +157,7 @@ SMP Developers
             <div className='cashContainer'>
 
               <div className='cash'>
-                <span>Total Fee</span>
+                <span>Total</span>
                 <span>{updatedUserDetails.Total}</span>
               </div>
               <div className='cash'>
@@ -174,8 +174,8 @@ SMP Developers
               </div>
             </div>
             <div className='emailContainer'>
-              <div> <input type="text" onChange={e => setSubject(e.target.value)} placeholder="Subject..." /></div>
-              <div><textarea rows={10} cols={30} placeholder="Enter Message to admin...." value={message} onChange={e => { setMessage(e.target.value) }}></textarea></div>
+              <div> <input type="text" onChange={e => setSubject(e.target.value)} style={{padding:"8px"}} placeholder="Subject..." /></div>
+              <div><textarea rows={10} cols={30} placeholder="Enter Message to admin...." value={message} style={{padding:"8px"}} onChange={e => { setMessage(e.target.value) }}></textarea></div>
               <div >
                 {(subject !== "" && message !== "") ?
 

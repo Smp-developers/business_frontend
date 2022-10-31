@@ -28,7 +28,7 @@ const TrainersStudent = ({ trainees }) => {
             {trainees.length > 0 ? <div style={{ padding: "20px", display: "flex", gap: "30px", flexWrap: "wrap" }}>
                 {
                     trainees.map((c, index) => (
-                        <div className='card' key={index}>
+                        <div className='card' style={{height:"310px"}} key={index}>
 
                             <img src={`${Cloudinary_url}/${c.image}`} width={150} height={150} alt="" />
                             <div className='courseName'>
@@ -42,7 +42,7 @@ const TrainersStudent = ({ trainees }) => {
                                 <span style={{ marginRight: "5px" }}>Job:</span>
                                 {c.company.slice(0)}
                             </div>
-                            <div>
+                            <div style={{width:"150px"}}>
                                 <span style={{ marginRight: "5px" }}>Skills:</span>
                                 {c.skills.slice(0)}
                             </div>

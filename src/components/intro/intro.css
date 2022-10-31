@@ -99,6 +99,7 @@
 @media screen and (max-width: 480px) {
   .i {
     flex-direction: column;
+   padding-top: -80px !important;
   }
   .i-intro{
     font-size: 20px;
@@ -106,7 +107,7 @@
   }
 
   .i-left-wrapper {
-  
+   
     padding: 10px;
     align-items: center;
     justify-content: center;
