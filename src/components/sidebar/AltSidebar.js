@@ -8,7 +8,7 @@ import jwtDecode from 'jwt-decode';
 const AltSidebar = () => {
     const [user, setUser] = useState([])
     const [loc, setLoc] = useState(false)
-    const [loadN,setLoadN] = useState(false)
+    const [loadN, setLoadN] = useState(false)
 
     useEffect(() => {
         if (localStorage.getItem('userDetails')) {
@@ -60,8 +60,26 @@ const AltSidebar = () => {
             <div className='wrapperC'>
 
                 <div className='menu' onClick={hiddenHandle}> <i className="fa-solid fa-bars"></i></div>
+                <div style={{display:"flex",alignItems:"center"}}>{user.length === 0 && !loc && <span
+                    onClick={() => {
+                        navigate("/login");
+                    }}
+                >
 
-                <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>
+                    <span className="side" style={{marginRight:"25px"}}>Login</span>
+                </span>}
+
+                    {user.length === 0 && !loc && <span
+                        onClick={() => {
+                            navigate("/signup");
+                        }}
+                    >
+
+                        <span className="side">Signup</span>
+                    </span>}
+                </div>
+
+                {user.length !== 0 && <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>}
 
 
             </div>
@@ -86,16 +104,16 @@ const AltSidebar = () => {
 
                 <ul>
                     {user.length === 0 && !loc && <li
-                        onClick={() => {
-                            hiddenHandle()
-                            navigate("/login");
-                        }}
+                    // onClick={() => {
+                    //     hiddenHandle()
+                    //     navigate("/login");
+                    // }}
                     >
 
-                        <span className="">Login</span>
+                        <span className="">Please Login !</span>
                     </li>}
 
-                    {user.length === 0 && !loc && <li
+                    {/* {user.length === 0 && !loc && <li
                         onClick={() => {
                             hiddenHandle()
                             navigate("/signup");
@@ -103,9 +121,9 @@ const AltSidebar = () => {
                     >
 
                         <span className="">Signup</span>
-                    </li>}
+                    </li>} */}
 
-                        {loadN && <div style={{marginLeft:"5px"}}>Fetching your details.....</div>}
+                    {loadN && <div style={{ marginLeft: "5px" }}>Fetching your details.....</div>}
 
                     {user.length > 0 && <li onClick={hiddenHandle}>
                         <img

@@ -119,12 +119,14 @@ const StudentCandidature = () => {
 
 
       <div className="topNavbar">
+        <div style={{display:"flex",alignItems:"center"}}>
         <div className="icons">
           <div className="dataset" style={{ color: "black", fontWeight: "600" }}>{user.id}</div>
         </div>
         <div className="midone" >
           <div className="dataset">{user.first_name}</div>
           <div className="em">{user.email}</div>
+        </div>
         </div>
 
         <div className="endside visi" >

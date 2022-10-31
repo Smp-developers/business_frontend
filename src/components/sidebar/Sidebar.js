@@ -3,7 +3,7 @@ import "./sidebar.scss";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Cloudinary_url,Backend_url } from "../../Config";
+import { Cloudinary_url, Backend_url } from "../../Config";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
@@ -11,36 +11,39 @@ import jwtDecode from "jwt-decode";
 const Sidebar = () => {
   const [cross, setCross] = useState("bar");
   const [user, setUser] = useState([])
-  const [loc,setLoc] = useState(false)
-  
+  const [loc, setLoc] = useState(false)
+
   useEffect(() => {
-    
+
     if (localStorage.getItem('userDetails')) {
       setLoc(true)
       axios.get(`${Backend_url}/api/getting_single_students/${jwtDecode(JSON.parse(localStorage.getItem('userDetails')).refresh).user_id}`,
-      { headers: { 
-        "Content-Type": "application/json",
-        
-        "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`} }
+        {
+          headers: {
+            "Content-Type": "application/json",
+
+            "Authorization": `Bearer ${JSON.parse(localStorage.getItem('userDetails')).access}`
+          }
+        }
       )
-      .then(res=>{
-      
-        if(res.status === 200){
-          setUser(prev=>[...prev,res.data])
-        }
-        else if(res.statusText === 'Unauthorized'){
-          localStorage.removeItem('userDetails')
-          navigate('/login')
-        }
-      })
-     
+        .then(res => {
+
+          if (res.status === 200) {
+            setUser(prev => [...prev, res.data])
+          }
+          else if (res.statusText === 'Unauthorized') {
+            localStorage.removeItem('userDetails')
+            navigate('/login')
+          }
+        })
+
     }
 
   }, [localStorage.getItem('userDetails')])
 
 
   const handleClick = (e) => {
-    if (cross === "bar"  ) {
+    if (cross === "bar") {
       document.querySelector(".sidebar").style.width = "200px";
       document.querySelector("#checkbox").checked = true;
       setCross("cross");
@@ -56,8 +59,8 @@ const Sidebar = () => {
   };
 
   const handle = (e) => {
-    if (cross === "bar" && window.screen.width>600) {
-      
+    if (cross === "bar" && window.screen.width > 600) {
+
       document.querySelector(".sidebar").style.width = "180px";
       document.querySelector("#checkbox").checked = true;
       setCross("cross");
@@ -86,52 +89,53 @@ const Sidebar = () => {
   return (
     <>
       <div
-      className="sidebar"
-      style={{ color: "white", backgroundColor: "#161b22" }}
-      onMouseOver={(e) => {
-        handle(e);
-      }}
-      onMouseLeave={handleB} 
-    >
-      <div className="navF">
-        <div className="top">
+        className="sidebar"
+        style={{ color: "white", backgroundColor: "#161b22" }}
+        onMouseOver={(e) => {
+          handle(e);
+        }}
+        onMouseLeave={handleB}
+      >
+        <div className="navF">
+          
+          <div className="top">
 
-          <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} style={{ marginTop: "25px" }} /></Link>
-        </div>
-        <input
-          type="checkbox"
-          className="checkbox"
-          id="checkbox"
-          style={{
-            position: "absolute",
-            top: "12px",
-            left: "18px",
-            opacity: "0",
-            cursor: "pointer",
-          }}
-        
-        />
+            <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} style={{ marginTop: "25px" }} /></Link>
+          </div>
+          <input
+            type="checkbox"
+            className="checkbox"
+            id="checkbox"
+            style={{
+              position: "absolute",
+              top: "12px",
+              left: "18px",
+              opacity: "0",
+              cursor: "pointer",
+            }}
 
-        <div className="">
-          <ul>
-            {user.length === 0 && !loc && <li
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              <i className="fa-solid fa-right-to-bracket"></i>
-              <span className="side">Login</span>
-            </li>}
-            {user.length === 0 && !loc && <li
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              <i className="fa-solid fa-right-to-bracket"></i>
-              <span className="side">Signup</span>
-            </li>}
+          />
 
-            {/* <li
+          <div className="">
+            <ul>
+              {user.length === 0 && !loc && <li
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                <i className="fa-solid fa-right-to-bracket"></i>
+                <span className="side">Login</span>
+              </li>}
+              {user.length === 0 && !loc && <li
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                <i className="fa-solid fa-right-to-bracket"></i>
+                <span className="side">Signup</span>
+              </li>}
+
+              {/* <li
               onClick={() => {
                 navigate("/courses");
               }}
@@ -140,65 +144,65 @@ const Sidebar = () => {
               <span className="side">Course details</span>
             </li> */}
 
-            {user.length > 0 && !user[0].is_superuser && <li
-              onClick={() => {
-                navigate("/candidature");
-              }}
-            >
-              <i className="fa-solid fa-user"></i>
-              <span className="side">Candidature</span>
-            </li>}
+              {user.length > 0 && !user[0].is_superuser && <li
+                onClick={() => {
+                  navigate("/candidature");
+                }}
+              >
+                <i className="fa-solid fa-user"></i>
+                <span className="side">Candidature</span>
+              </li>}
 
 
-            {user.length > 0 && (user[0].is_superuser && <li
-              onClick={() => {
-                navigate("/frontend/admin");
-              }}
-            >
-              <i className="fa-solid fa-lock"></i>
-              <span className="side">Administration</span>
-            </li>)}
-
-
-
+              {user.length > 0 && (user[0].is_superuser && <li
+                onClick={() => {
+                  navigate("/frontend/admin");
+                }}
+              >
+                <i className="fa-solid fa-lock"></i>
+                <span className="side">Administration</span>
+              </li>)}
 
 
 
-          </ul>
+
+
+
+            </ul>
+          </div>
+
+          {user.length > 0 && <div className="bottom">
+            <div className="item noti">
+              <NotificationsNoneOutlinedIcon className="icon" />
+              <div className="counter">1</div>
+            </div>
+            <div className="item help" style={{ fontSize: "20px" }}>
+              <i className="fa-solid fa-power-off" onClick={e => {
+
+
+                if (window.confirm('Do yo want to logout')) {
+                  localStorage.removeItem('userDetails')
+
+                  navigate('/login')
+                  window.location.reload()
+                }
+              }}></i>
+            </div>
+
+            <div className="item profile">
+              <img
+                src={`${Cloudinary_url}/${user[0].image}`}
+                alt=""
+                className="avatar"
+
+              />
+            </div>
+
+          </div>}
         </div>
-        
-        {user.length > 0 && <div className="bottom">
-          <div className="item noti">
-            <NotificationsNoneOutlinedIcon className="icon" />
-            <div className="counter">1</div>
-          </div>
-          <div className="item help" style={{ fontSize: "20px" }}>
-            <i className="fa-solid fa-power-off" onClick={e => {
-             
-
-              if (window.confirm('Do yo want to logout')) {
-                localStorage.removeItem('userDetails')
-                
-                navigate('/login')
-                window.location.reload()
-              }
-            }}></i>
-          </div>
-
-          <div className="item profile">
-            <img
-              src={`${Cloudinary_url}/${user[0].image}`}
-              alt=""
-              className="avatar"
-
-            />
-          </div>
-        
-        </div>}
       </div>
-    </div>
-  
-   
+
+
     </>
   );
 };
