@@ -23,7 +23,7 @@ const Trainee_list = ({ trainees }) => {
         <>
             <Alert msg={msg} trans={trans} color={color} />
             {load === true && <Loader />}
-            {trainees.length > 0 ? <div style={{ padding: "20px", height: "350px", overflowY: "scroll", display: "flex", gap: "30px", flexWrap: "wrap" }}>
+            {trainees.length > 0 ? <div style={{ padding: "20px", display: "flex", gap: "30px", flexWrap: "wrap" }}>
                 {
                     trainees.map((c, index) => (
                         <div className='card' key={index} >

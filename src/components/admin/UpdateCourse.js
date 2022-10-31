@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Backend_url, Cloudinary_url } from '../../Config'
 import Alert from '../alert/Alert'
 import Loader from "../loader/Loader";
@@ -78,6 +79,8 @@ const UpdateCourse = () => {
             <Alert msg={msg} trans={trans} color={color} />
             {load === true && <Loader />}
             <div className='updateHolder'>
+            <Link to={`/frontend/admin`} style={{fontSize:"20px",cursor:"pointer"}}><i className="fa-solid fa-arrow-left"></i></Link>
+
                 <div className='left'>
                     <img src={`${Cloudinary_url}/${course.image}`} width={450} height={450} alt="" />
 
