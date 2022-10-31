@@ -134,7 +134,7 @@ const EditStudent = () => {
 
 
     const sendOtp = (e) => {
-        var string = `0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ`;
+        var string = `0123456789`;
         let OTP = '';
         var len = string.length;
         for (let i = 0; i < 6; i++) {
