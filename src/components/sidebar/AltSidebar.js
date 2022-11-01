@@ -60,14 +60,15 @@ const AltSidebar = () => {
             <div className='wrapperC'>
 
                 <div className='menu' onClick={hiddenHandle}> <i className="fa-solid fa-bars"></i></div>
-                <div style={{display:"flex",alignItems:"center"}}>{user.length === 0 && !loc && <span
-                    onClick={() => {
-                        navigate("/login");
-                    }}
-                >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    {user.length === 0 && !loc && <span
+                        onClick={() => {
+                            navigate("/login");
+                        }}
+                    >
 
-                    <span className="side" style={{marginRight:"25px"}}>Login</span>
-                </span>}
+                        <span className="side" style={{ marginRight: "25px" }}>Login</span>
+                    </span>}
 
                     {user.length === 0 && !loc && <span
                         onClick={() => {
@@ -77,10 +78,11 @@ const AltSidebar = () => {
 
                         <span className="side">Signup</span>
                     </span>}
+                    {loadN ? <div style={{ marginLeft: "5px" }}>Fetching your details.....</div> : user.length !== 0 && <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>}
                 </div>
 
-                {loadN ? <div style={{ marginLeft: "5px" }}>Fetching your details.....</div>:user.length !== 0 && <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>}
-                
+
+
 
 
             </div>
@@ -124,7 +126,7 @@ const AltSidebar = () => {
                         <span className="">Signup</span>
                     </li>} */}
 
-                   
+
 
                     {user.length > 0 && <li onClick={hiddenHandle}>
                         <img
