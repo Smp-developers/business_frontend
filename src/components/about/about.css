@@ -78,7 +78,7 @@
     .a{
       flex-direction: column;
       text-align: center;
-      margin-top: 50px;
+      margin-top: -120px;
     }
 
     .a-left {
@@ -100,5 +100,6 @@
 
     .a-right{
       padding: 20px;
+      margin-top: -120px;
     }
 }

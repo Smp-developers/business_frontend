@@ -79,7 +79,8 @@ const AltSidebar = () => {
                     </span>}
                 </div>
 
-                {user.length !== 0 && <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>}
+                {loadN ? <div style={{ marginLeft: "5px" }}>Fetching your details.....</div>:user.length !== 0 && <div>  <Link to='/' ><img src={`${Cloudinary_url}/main_logo_vheqme_j3hi9m.png`} alt="" width={40} height={40} /></Link></div>}
+                
 
 
             </div>
@@ -123,7 +124,7 @@ const AltSidebar = () => {
                         <span className="">Signup</span>
                     </li>} */}
 
-                    {loadN && <div style={{ marginLeft: "5px" }}>Fetching your details.....</div>}
+                   
 
                     {user.length > 0 && <li onClick={hiddenHandle}>
                         <img
