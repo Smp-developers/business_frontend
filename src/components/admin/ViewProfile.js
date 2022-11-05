@@ -15,7 +15,7 @@ const ViewProfile = () => {
     const [color, setColor] = useState('')
     const [referal, setReferal] = useState(0)
     const [batch, setBatch] = useState(0)
-    const [total, setTotal] = useState(10000)
+    const [total, setTotal] = useState(12000)
     const [payment, setPayment] = useState(0)
     const [message, setMessage] = useState('')
 
@@ -386,7 +386,7 @@ SMP Developers`
                         <div className='study'>
 
                             <div><span>{user.year_of_graduation}</span></div>
-                            <div><span>{user.college}</span></div>
+                            <div style={{flexBasis:"100px"}}><span>{user.college}</span></div>
                             <div><span>{user.role}</span></div>
                         </div>
                         <div><span className='name'>{user.first_name}</span></div>
@@ -445,8 +445,8 @@ SMP Developers`
                                     <option value={7000}>7000</option>
                                     <option value={8000}>8000</option>
                                     <option value={9000}>9000</option>
-                                    <option value={10000} selected>10000</option>
-                                    <option value={15000}>15000</option>
+                                    <option value={10000} >10000</option>
+                                    <option value={12000} selected>12000</option>
 
                                 </select>
                                 <i className="fa-solid fa-arrow-up " style={{marginLeft:"10px"}} onClick={totalUpdate}></i>
@@ -459,7 +459,7 @@ SMP Developers`
                                     {/* <option value={0}>0</option>
                                     <option value={2500}>2500</option>
                                     <option value={5000}>5000</option>
-                                    <option value={10000}>8000</option>
+                                    <option value={12000}>8000</option>
                                     <option value={15000}>9000</option>
 
 
@@ -486,7 +486,7 @@ SMP Developers`
                             </div>
                         </div>
                         <div className='rightBottom'>
-                            <textarea rows={10} cols={50} value={message} onChange={e => { setMessage(e.target.value) }}></textarea>
+                            <textarea rows={10} cols={50} value={message} style={{padding:"8px"}} onChange={e => { setMessage(e.target.value) }}></textarea>
                             {!emailSent ? <button className='update' onClick={sendMail} style={{ display: "block" }}>Send mail</button> : <button className='update buttonSuc'  style={{ display: "block",background:"green",cursor:"not-allowed" }}>Mail sent</button> }
                         </div>
                     </div>
